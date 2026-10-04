@@ -6,7 +6,7 @@ body {
 /* 表題Box */
 .title-box {
     background-color: 'navy';
-    color: white;
+    color: 'white';
     font-weight: bold;
     padding: 20px;
     margin-bottom: 30px;
