@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+	<head>
+	    <meta charset="UTF-8">
+	    <title>Spring Boot入門 #04</title>
+
+	    <!-- Bootstrap -->
+	    <link
+	        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	        rel="stylesheet">
+	    
+	    <link rel="stylesheet" href="../CSS/style01.css">
+	    <link rel="stylesheet" href="../CSS/table.css">
+	    <link rel="stylesheet" href="../CSS/layout.css">
+	    <link rel="stylesheet" href="../CSS/explanationDesign.css">
+	</head>
+
+	<body>
+		<div class="container mt-4">
+			<!-- 表題 -->
+			<div class="title-box">
+				<h1 class="mb-0">ニャジラのSpring Bootと踊る</h1>
+			</div>
+
+			<h2>第０４回　View-Model-Controller</h2>
+
+			<!---１ --->
+			<div class="midasi2">
+				<b>1. 今回の目的</b>
+			</div>
+			<div class="box_red">
+				<b>Modelはデータを運ぶ箱</b>
+			</div>
+
+			<!--- ２ --->
+			<br>
+			<div class="box_normal">
+				<div class="midasi2">
+					<b>2. 今回の学習内容</b>
+				</div>
+				<div class="box_normal">
+					今回は、SpringMVCのModelの基本的な使い方を見てみましょう。<br>
+					<p class="red-bold-text">Modelの役割は、ViewとControllerの間のデータの受け渡し</p>が主な仕事になります。<br><br>
+					いやね、初めてこのModelの考え方を見た時、「こんな方法があったのか！」と驚きましたよ。<br>
+					それまでは、<b>HashMap</b>やら、<b>ArrayList</b>でデータの受け渡しをやったり、メソッドの引数でやったりとけっこうめんどかったのですよ。<br>
+					それもあって、<b>JSP</b>を使って作るのが個人的には好きでした。<br>
+					だって、<b>PHP</b>や、<b>VBScript</b>を使って作るのと同じ要領ですからね。
+					<br><br>
+					<b>書籍注文システム　「E-Hon」</b>を作りながら邪悪な　Spring Boot　の研究をしていきましょう。
+					<br>
+					今回は、<b>View-Model-Controller</b>が主題ですので、DBもファイルも使わないシステムです。
+				</div>
+			</div>
+
+			<!--- ３ -->
+			<br>
+			<div class="box_normal">
+				<div class="midasi2">
+					<b>３. シーケンス図</b>
+				</div>
+				<div class="box_normal_IMG">
+					<img src="../IMG/シーケンス図.png" alt="Sample02のシーケンス図">
+				</div>
+				<br>ざっと、こんな流れですかね。</br>
+			</div>
+
+			<!--- ４ -->
+			<br>
+			<div class="box_normal">
+				<div class="midasi2">
+					<b>４. 実行結果</b>
+				</div>
+				<br>
+				<div class="row g-3">
+					<!-- 1枚目の写真 -->
+					<div class="col-md-4">
+						<img src="../IMG/Sample0201画面.png" alt="写真1" class="img-fluid rounded"><br>
+						(入力画面）
+					</div>
+
+					<!-- 2枚目の写真 -->
+					<div class="col-md-4">
+						<img src="../IMG/Sample0201画面02.png" alt="写真2" class="img-fluid rounded my-photo my-photo"><br>
+						(入力）
+					</div>
+
+					<!-- 3枚目の写真 -->
+					<div class="col-md-4">
+						<img src="../IMG/Sample0201画面03.png" alt="写真3" class="img-fluid rounded my-photo"><br>
+						(入力結果画面）
+					</div>
+				</div>
+			</div>
+
+			<!--- ５ -->
+			<br>
+			<div class="box_normal">
+				<div class="midasi2">
+					<b>５. 下準備</b>
+				</div><br>
+
+				<!-- 表 -->
+				<div class="container">
+					<table class="table table-bordered">
+					    <!-- ボディ（中身データのグループ） -->
+					    <tbody>
+					        <tr>
+					            <td class="table-cell-cyan">IDE</td>
+					            <td>Eclipse</td>
+					        </tr>
+					        <tr>
+					            <td class="table-cell-cyan">プロジェクト</td>
+					            <td>Sample02</td>
+					        </tr>
+					        <tr>
+					            <td class="table-cell-cyan">依存関係</td>
+					            <td class="flex-cell">
+									<img src="../IMG/Sample02 依存関係.png" alt="依存関係" class="img-fluid rounded my-photo">
+									<div style="font-size: 16px;">
+										<ul>
+											<li><b>Spring Boot DevTools</b> : なんか色々処理を早くしてくれるらしい</li>
+											<li><b>Spring Web</b> : 「URL」と「Javaのプログラム」を結びつけるらしい</li>
+											<li><b>Thymeleaf（タイムリーフ）</b></li>
+											<li><b>Lombok（ロンボック）</b></li>
+										</ul>
+									</div>
+								</td>
+					        </tr>
+					    </tbody>
+					</table>
+				</div>
+			</div><br>
+
+			<!-- ６ -->
+			<div class="box_normal">
+				<div class="midasi2">
+					<b>６. プログラム</b>
+				</div><br>
+				
+				<!--==========================================
+				**** Sample02Controller
+				****========================================-->
+				<div>
+					<div class="midasi3">
+						Sample02Controller
+					</div>
+
+					<div class="flex-cell-program">
+						<!--<div>-->
+						<div>
+							<pre>
+package com.example.sample02;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+public class Sample02Controller {
+	
+	// 1, 2, 3: http://localhost:8080/newmember の処理
+	@GetMapping("/newmember")
+	public String sample0201(Model model) {
+		model.addAttribute("memberForm", new MemberForm());
+		return "newmember";
+	}
+
+	// 5: /newmemberResult の処理
+	@PostMapping("/newmemberResult")
+	public String sample0201Result(@ModelAttribute MemberForm memberForm, Model model) {
+		model.addAttribute("memberForm", memberForm);
+		return "newMemberResult";
+	}
+}
+
+							</pre>
+						</div>
+
+						<div class="flow-box">
+							【処理の流れ　その１】<br><br>
+
+							ブラウザ<br>
+							　　↓　http;//localhost:8080/newmember<br>
+							Sample02Controller<br>
+							　　↓　<br>
+							　　sample0201(Model model)<br>
+							　　↓　<b class="red-bold-text">ここでModelを使うのが主題</b><br>
+							newmember.html
+						</div>
+					</div>
+				</div><br>
+			</div>	
+
+			<!-- 解説１-->
+			 <div>
+				<div class="midasi4">
+					sample0201(Model model) の解説　その１　Model model とは何？
+				</div>
+				<div class="simple-box">
+					<pre>
+// 1, 2, 3: http://localhost:8080/newmember の処理
+@GetMapping("/newmember")
+public String sample0201(<b class="red-bold-text">Model model</b>) {
+	model.addAttribute("memberForm", new MemberForm());
+	return "newmember";
+}
+					</pre>
+				</div>
+
+				<div class="flowNormal-box">
+					<b class="red-bold-text">public String sample0201(Model model)</b><b>からいきましょう。</b><br><br>
+					わっけ分からんですよね。しかたないからおまじないになってしまう所なんですよ。<br>
+					<b>public String sample0201(Model model)</b>の引数<b>Model model</b>って何じゃ？<br><br>
+
+					<b class="red-bold-text">１，箱を作りましょう</b><br>
+					<b class="red-bold-text">Model model</b>は、<b>コントローラー（Java側）</b>から<b>ビュー（HTML画面側）</b>へデータを渡すための「入れ物（橋渡し役）」</b>です。<br><br>
+					<b class="red-bold-text">Model model</b>は、Spring Bootがデータを受け渡すための箱を作っていると思って下さい。<br>
+					箱の中身は空っぽです。まさに、箱だけです。<br><br>
+
+					<b class="red-bold-text">２，いつ箱を作る？</b><br>
+					<b class="red-bold-text">Model model　を「Javaで作ったデータを、画面（HTML）に表示させたいとき」</b>に使います。<br><br>
+
+					<b class="red-bold-text">３，new がないのになんで使える？</b><br>
+					<b class="blue-bold-text">import org.springframework.ui.Model;</b>で使えるようになっています。<br>
+					ね、だから言ったでしょ、<b>「写経するときは　import、アノテーションなしで写経しましょう</b>って。そうしたら、これに気付くと思いますよ。<br><br>
+					【動画参照してください】<br>
+					<a href="https://youtu.be/nE-740JDSBc">【Spring Boot#2】アノテーションを打った瞬間、裏で何が起きているのか？［モヤモヤ解消］</a>
+				</div>
+			 </div><br><br>
+
+			<!-- 解説２-->
+			 <div>
+				<div class="midasi4">
+					model.addAttribute("memberForm", new MemberForm()); の解説
+				</div>
+				<div class="simple-box">
+					<pre>
+// 1, 2, 3: http://localhost:8080/newmember の処理
+@GetMapping("/newmember")
+public String sample0201Model model) {
+	<b class="red-bold-text">model.addAttribute("memberForm", new MemberForm());</b>
+	return "newmember";
+}
+					</pre>
+				</div>
+
+				<div class="flowNormal-box">
+					相も変わらず邪悪な！<br>
+					くっそわからん部分ですな。<br><br>
+					<b class="blue-bold-text">model.addAttribute("memberForm", new MemberForm());</b>は、<br>
+					<b class="red-bold-text">「画面（HTMLなどのテンプレート）とデータをやり取りするための『空の入れ物』を作って、画面側に渡すこと」</b>です。<br><br>
+					
+					<b class="red-bold-text">１，「空のフォーム用オブジェクト」のインスタンス化</b><br>
+					<b>new MemberForm()</b> で、会員登録画面などで入力される<b>データを受け取るためのクラス（MemberForm）のインスタンス（実体）を新しく生成</b>しています。<br><br>
+					<b class="red-bold-text">２，View（画面）へのデータの受け渡し</b><br>
+					<b class="blue-bold-text">model.addAttribute("キー名", 渡したいオブジェクト) </b>は、<b>Controller から View（この場合は "newmember" という名前のテンプレート）へデータを渡すための仕組み</b>です。<br>
+					ここでは <b class="blue-bold-text">"memberForm" という名前（キー）を付けて、先ほど作った MemberForm のオブジェクトを登録</b>しています。<br><br>
+					<b class="red-bold-text">３，Thymeleaf などのテンプレートエンジンとの連携</b><br>
+					画面側（HTMLなど）で、例えば以下のようにしてこのオブジェクトが使われます。<br>
+					<div class="simple-box">
+						<pre><code>
+&lt;form th:action="@{/register}" th:object="${memberForm}" method="post"&gt;
+    &lt;input type="text" th:field="*{name}" /&gt;
+&lt;/form&gt;
+						</code></pre>
+					</div>
+					このように、<b>Thymeleaf などのテンプレートエンジンは、Controller から渡されたオブジェクトを使ってフォームのデータをバインド</b>することができます。<br><br>
+					<b class="blue-bold-text">model.addAttribute("memberForm", new MemberForm());</b> は、<b>Controller から View へデータを渡すための重要なステップ</b>です。<br>
+					これにより、ユーザーが入力したデータを受け取るためのフォームオブジェクトが画面側で利用可能になります。
+				</div>
+			 </div><br><br>
+
+			<!-- sample0201Result-->
+			 <div>
+				<div class="midasi4">
+					public String sample0201Result(@ModelAttribute MemberForm memberForm, Model model) の解説
+				</div>
+				<div class="simple-box">
+					<pre><code>
+	<b class="blue-bold-text">@PostMapping("/newmemberResult")</b>
+	public String sample0201Result(<b class="red-bold-text">@ModelAttribute MemberForm memberForm, Model model</b>) {
+		<b class="red-bold-text">model.addAttribute("memberForm", memberForm);</b>
+		return "newMemberResult";
+	}
+					</code></pre>
+				</div>
+
+				<div class="flowNormal-box">
+					<div>
+						<b class="red-bold-text">１，@ModelAttribute MemberForm memberForm, Model model</b><br><br>
+						<div class="flowNormal-greenbox">
+							<b class="blue-bold-text">1. @ModelAttribute MemberForm memberForm の意味</b><br>
+							リクエスト（フォーム送信など）で送られてきたデータを受け取り、Javaのオブジェクト（この場合は MemberForm クラス）に自動的にバインド（格納）するためのアノテーションです。<br>
+							<b class="red-bold-text">自動データバインディング:</b> 画面のフォームから送信されたパラメータ名（例: name や email など）と、MemberForm クラスのフィールド名が一致している場合、Springが自動的に値をセットしてくれます。<br>
+							<b class="red-bold-text">モデルへの自動追加:</b> このアノテーションがついたオブジェクトは、明示的にコードを書かなくても、自動的に Model に追加されます（デフォルトではクラス名の先頭を小文字にした memberForm というキー名になります）。これにより、次の画面（ビュー）で入力内容を再表示したい場合などにそのまま利用できます。<br><br>					
+						</div><br>
+
+						<div class="flowNormal-greenbox">
+							<b class="blue-bold-text">２. Model model の意味</b><br>
+							これは、少し前にお話ししましたが、もう一度おさらいです。<br>
+							コントローラーからビュー（ThymeleafやJSPなどの画面）へデータを渡すための容器（コンテナ）です。
+						</div><br>
+					</div>
+
+					<div>
+						<b class="red-bold-text">２，model.addAttribute("memberForm", memberForm);　解説</b><br><br>
+						<div class="flowNormal-greenbox">
+							<b class="blue-bold-text">1. @ModelAttribute MemberForm memberForm の意味</b><br>
+							リクエスト（フォーム送信など）で送られてきたデータを受け取り、Javaのオブジェクト（この場合は MemberForm クラス）に自動的にバインド（格納）するためのアノテーションです。<br>
+							<b class="red-bold-text">自動データバインディング:</b> 画面のフォームから送信されたパラメータ名（例: name や email など）と、MemberForm クラスのフィールド名が一致している場合、Springが自動的に値をセットしてくれます。<br>
+							<b class="red-bold-text">モデルへの自動追加:</b> このアノテーションがついたオブジェクトは、明示的にコードを書かなくても、自動的に Model に追加されます（デフォルトではクラス名の先頭を小文字にした memberForm というキー名になります）。これにより、次の画面（ビュー）で入力内容を再表示したい場合などにそのまま利用できます。<br><br>					
+						</div><br>
+
+						<div class="flowNormal-greenbox">
+							<b class="blue-bold-text">２. Model model の意味</b><br>
+							これは、少し前にお話ししましたが、もう一度おさらいです。<br>
+							コントローラーからビュー（ThymeleafやJSPなどの画面）へデータを渡すための容器（コンテナ）です。
+						</div><br>
+					</div>
+				</div>
+			 </div><br><br>
+
+			<!--=========================================================
+			**** newmember.html
+			****======================================================-->
+			 <div>
+				<div class="midasi3">
+					newmember.html
+				</div>
+				<div class="simple-box">
+					<pre><code>
+&lt;!DOCTYPE html&gt;
+<b class="red-bold-text">&lt;html xmlns:th="http://www.thymeleaf.org"&gt;  ①</b>
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;新規会員登録&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;書籍注文システム - 会員情報入力&lt;/h1&gt;
+    <b class="red-bold-text">&lt;form th:action="@{/newmemberResult}" th:object="${memberForm}" method="post"&gt;    ②</b>
+        &lt;div&gt;
+            &lt;label&gt;漢字姓: &lt;input type="text" <b class="red-bold-text">th:field="*{kanjiSei}"</b> /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;漢字名: &lt;input type="text" th:field="*{kanjiMei}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;カナ姓: &lt;input type="text" th:field="*{kanaSei}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;カナ名: &lt;input type="text" th:field="*{kanaMei}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;生年月日: &lt;input type="date" th:field="*{birthDate}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;郵便番号: &lt;input type="text" th:field="*{postalCode}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;住所: &lt;input type="text" th:field="*{address}" size="50" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;button type="submit"&gt;送信&lt;/button&gt; &lt;!-- 送信ボタン --&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+					</code></pre>
+				</div>
+
+				<div class="flowNormal-box">
+					<b class="red-bold-text">① &lt;html xmlns:th="http://www.thymeleaf.org"&gt;</b><br>
+					Javaのサーバーサイドテンプレートエンジンである Thymeleaf（タイムリーフ） をHTMLファイル内で使用するために記述する 名前空間（Namespace）の宣言 です。<br><br>
+
+					<b class="red-bold-text">② &lt;form th:action="@{/newmemberResult}" th:object="${memberForm}" method="post"&gt;</b><br>
+						<ol>
+							<li class="red-bold-text">html の&lt;form&gt; ~ &lt;/form&gt; タグ</li>
+							HTMLの <b class="red-bold-text">&lt;form&gt; タグ</b>は、ユーザーからの入力を受け付け、それを<b class="red-bold-text">サーバー（バックエンド）へ送信するための領域を定義する</b>重要な要素です。<br><br>
+							
+							<li class="red-bold-text">th:action="@{/newmemberResult}"</li>
+							<b class="blue-bold-text">th: と @ {...} (Thymeleafの機能）</b><br><br>
+							
+							<b class="blue-bold-text">@ {...}（リンクURL式）</b>
+							<div>
+							Thymeleaf独自の書き方で、「コンテキストパスを自動的に考慮したURL」を生成してくれます。<br>
+							例えば、Spring Bootアプリケーション全体のURLが http://localhost:8080/myapp/ のように、ルートの他に「コンテキストパス（プレフィックス）」を持っている場合でも、Thymeleafが自動的に /myapp/newmemberResult のように正しいパスに書き換えてくれます。<br>
+							これにより、もし後からアプリのURL構造やプレフィックスを変更したとしても、HTML側のパスを書き直す必要がなくなるというメリットがあります。
+							</div><br><br>
+
+							<li class="red-bold-text">th:object="${memberForm}"</li>
+							<div>
+								Thymeleafを使ったHTMLフォームにおいて、「このフォーム全体を、Java側から渡された特定のオブジェクト（データを入れる箱）と結びつける（バインドする）」ための設定です。
+								これによって、HTMLの入力欄とJava側のデータがシームレスにつながります。
+							</div><br><br>
+							
+							<li class="red-bold-text">th:field="*{kanjiSei}"</li>
+							<div>
+								Thymeleafを使ったHTMLフォームにおいて、<b class="red-bold-text">「入力欄（この場合は姓の漢字入力欄）と、Java側のオブジェクトにある特定のフィールド（属性）を双方向につなぐ（バインドする）」</b>ための設定です。<br><br>
+								<b class="blue-bold-text">th:field:</b>入力要素（&lt;input&gt; や &lt;select&gt; など）に対して、Javaオブジェクトのフィールドを割り当てるためのThymeleafの属性です。<br><br>
+								<b class="blue-bold-text">*（アスターリスク）:</b>少し前に出てきた th:object="${memberForm}" で指定した<b class="red-bold-text">「親オブジェクト（memberForm）」の中身を指す省略記号</b>です。<br><br>
+								<b class="blue-bold-text">{kanjiSei}:</b>memberForm というJavaのクラスにあるプロパティ名（フィールド名）です（例: private String kanjiSei; のような変数）。<br><br>
+								つまり、<b class="red-bold-text">th:field="*{kanjiSei}" </b>は、<b class="red-bold-text">「memberForm.kanjiSei」 という変数とこの入力欄を結びつけています。</b></br>
+							</div>
+						</ol>
+				</div>
+			 </div><br><br>
+
+			<!--=========================================================
+			**** newmember.html
+			****======================================================-->
+			 <div>
+				<div class="midasi3">
+					newMemberResult.html
+				</div>
+				<div class="simple-box">
+					<pre><code>
+&lt;!DOCTYPE html&gt;
+<b class="blue-bold-text">&lt;html xmlns:th="http://www.thymeleaf.org"&gt;</b>
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;登録内容確認&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;書籍注文システム - 登録内容確認&lt;/h1&gt;
+    &lt;p&gt;以下の内容で受け付けました。&lt;/p&gt;
+    &lt;ul&gt;
+        &lt;li&gt;漢字姓: &lt;span <b class="red-bold-text">th:text="${memberForm.kanjiSei}"</b>&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;漢字名: &lt;span th:text="${memberForm.memberForm.kanjiMei}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;カナ姓: &lt;span th:text="${memberForm.kanaSei}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;カナ名: &lt;span th:text="${memberForm.kanaMei}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;生年月日: &lt;span th:text="${memberForm.birthDate}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;郵便番号: &lt;span th:text="${memberForm.postalCode}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;住所: &lt;span th:text="${memberForm.address}"&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;&lt;a th:href="@{/newmember}"&gt;戻る&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+					</code></pre>
+				</div>
+
+				<div class="flowNormal-box">
+					<b class="red-bold-text">th:text="..." （左側）：</b>Thymeleafの機能で、「このタグの中身を、右側で指定したデータに書き換えて表示してね」 という指示です。<br><br>
+					<b class="red-bold-text">${...} （中身の囲み）：</b>Java（サーバー側）から渡されたデータ箱の中から、中身を取り出すためのルールです。<br><br>
+					<b class="red-bold-text">memberForm.kanjiSei （右側の中身）：</b>画面から送られてきた、または画面に表示する「会員情報（フォーム）」のまとまり（オブジェクト）です。<br><br>
+					<b class="red-bold-text">kanjiSei：</b>その中にある「漢字の苗字（姓）」が入っている項目（プロパティ）です。<br>
+				</div>
+			 </div><br><br>
+
+			<!--=========================================================
+			**** MemberForm.java
+			****======================================================-->
+			 <div>
+				<div class="midasi3">
+					MemberForm.java
+				</div>
+				<div class="simple-box">
+					<pre><code>
+	package com.example.sample02;
+
+	import lombok.Data;
+
+	@Data
+	public class MemberForm {
+		private String kanjiSei;   // 漢字姓
+		private String kanjiMei;   // 漢字名
+		private String kanaSei;    // カナ姓
+		private String kanaMei;    // カナ名
+		private String birthDate;  // 生年月日
+		private String postalCode; // 郵便番号
+		private String address;    // 住所
+	}					
+					</code></pre>
+				</div>
+
+				<div class="flowNormal-box">
+					これが、既に何回も出て来た　MemberForm　の中身です。<br>
+					<b class="red-bold-text">@Data</b>が　Lombok　を使用しています。<br>
+					Lombok は大変便利なツールです。<br>
+					<img src="../IMG/Lombok使用.png" alt="Lombok使用" class="img-fluid rounded my-photo1200"><br>
+					この素晴らしい所は、setter、getter、toString、equals、hashCode　などのメソッドを自動生成してくれる所です。<br>
+					このおかげで、<b>MemberForm</b>の中身がすっきりして、見やすくなっています。<br>
+					<b class="red-bold-text">Lombokを使わない場合</b>は、<b>MemberForm</b>の中身は、<b>kanjiSei、kanjiMei、kanaSei、kanaMei、birthDate、postalCode、address</b>の７つの変数に対して、<b>setter、getter、toString、equals、hashCode</b>のメソッドを自分で作らなければなりません。<br>
+					それは、めんどくさいですよね。<br>
+					<b class="red-bold-text">Lombokを使う場合</b>は、<b>@Data</b>を付けるだけで、<b>setter、getter、toString、equals、hashCode</b>のメソッドを自動生成してくれます。<br>
+				</div>
+				<br>
+				いかがですか？<br>
+				Modelがあることによって、Viewの中に余計なプログラムを書く必要がなくなり、Viewの中身がスッキリしましたね。<br>
+				ViewとControllerを分離する試みは色々なフレームワークで行われていますが、Spring MVCのように、Modelを使ってViewとControllerを分離する方法は、非常に有効な手段です。<br>
+				<br>
+				　昔はですね、Viewの中にプログラムを書いてしまうことが多かったんです。<br>
+				どんなプログラムかと言うと、DBに書き込むSQL文や、DBからデータを取ってくるSQL文なども、Viewの中に書かれていました。<br>
+				HTMLはあるわ、SQLはあるわ、JavaScriptはあるわ、CSSはあるわ、もう大変なことになっていました。<br>
+				MVCモデル？それおいしいの？っていう状態でした。<br>
+			 </div><br><br>
+		</div><br><br>
+
+		<a href="../index .html">
+	        ← トップページへ戻る
+	    </a>
+
+	</body>
+</html>
