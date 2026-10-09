@@ -1,0 +1,56 @@
+/* ==========================================
+カスタムCSS定義 (css/table.css)
+========================================== */
+
+/* 表全体の枠組み（外枠と全体の罫線） */
+.custom-box-table {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #212529;
+}
+
+/* 行のレイアウトと下罫線 */
+.custom-box-row {
+    display: flex;
+    border-bottom: 1px solid #212529;
+}
+
+/* 最後の行は下罫線を消す */
+.custom-box-row:last-child {
+    border-bottom: none;
+}
+
+/* 個々のセル（Box）の共通スタイル */
+.custom-box-cell {
+    flex: 1 1 auto;         / 3つのセルを均等幅にする */
+    padding: 1rem;
+    border-right: 1px solid #212529;
+}
+
+/* 最後の列（右端）は右罫線を消す */
+.custom-box-cell:last-child {
+    border-right: none;
+}
+
+/* 1行目全体の背景色 */
+.row-lightcyan .custom-box-cell {
+    background-color: lightcyan;
+}
+
+/* 各行の「1番目のセル」だけに背景色を適用する */
+.custom-box-cell:nth-child(1) {
+    background-color: lightcyan;
+}
+
+/*テーブルのセルをbackground-color: cyan*/
+.table-cell-cyan{
+    background-color: #ff9999;
+    font-weight: bold;
+}
+
+/*<td>の中に写真の横に文字を表示する*/
+.flex-cell {
+  display: flex;       /* 横並びにする */
+  align-items: center; /* 縦方向の位置を中央に揃える */
+  gap: 10px;           /* 画像と文字の間隔を開ける */
+}

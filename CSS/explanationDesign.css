@@ -1,1 +1,80 @@
+/*============================================================
+ * 解説などのボックスのデザイン
+ *===========================================================*/
 
+ /*----------------------------------------
+ * simple-box
+ *--------------------------------------*/
+.simple-box {
+  border: 2px solid #3b82f6;      /* 枠線の太さ、種類、色 */
+  background-color: lightyellow;  /* 背景色 */
+  padding: 5px 20px;                    /* 内側の余白 */
+  border-radius: 8px;               /* 角丸 */
+  color: #1e293b;                 /* 文字色 */
+  font-size: 20px;                /* フォントサイズ　10Point */
+}
+
+ /*----------------------------------------
+ * flow-box
+ *--------------------------------------*/
+.flow-box {
+  border: 2px solid #3b82f6;      /* 枠線の太さ、種類、色 */
+  background-color: aliceblue;    /* 背景色 */
+  padding: 20px;                    /* 内側の余白 */
+  border-radius: 8px;               /* 角丸 */
+  color: #1e293b;                 /* 文字色 */
+  font-size: 19px;                /* フォントサイズ　10Point */
+}
+
+.flow8pt-box {
+  border: 2px solid #3b82f6;      /* 枠線の太さ、種類、色 */
+  background-color: aliceblue;    /* 背景色 */
+  padding: 20px;                    /* 内側の余白 */
+  border-radius: 8px;               /* 角丸 */
+  color: #1e293b;                 /* 文字色 */
+  font-size: 11px;                /* フォントサイズ　10Point */
+}
+
+.flow9pt-box {
+  border: 2px solid #3b82f6;      /* 枠線の太さ、種類、色 */
+  background-color: aliceblue;    /* 背景色 */
+  padding: 20px;                    /* 内側の余白 */
+  border-radius: 8px;               /* 角丸 */
+  color: #1e293b;                 /* 文字色 */
+  font-size: 12px;                /* フォントサイズ　10Point */
+}
+
+.flowNormal-box {
+  border: 2px solid #3b82f6;      /* 枠線の太さ、種類、色 */
+  background-color: aliceblue;    /* 背景色 */
+  padding: 20px;                    /* 内側の余白 */
+  border-radius: 8px;               /* 角丸 */
+  color: #1e293b;                 /* 文字色 */
+  /*font-size: 14px;*/                /* フォントサイズ　10Point */
+}
+
+/*----------------------------------------
+ * 緑のボックス
+ *--------------------------------------*/
+.flowNormal-greenbox {
+  border: 2px solid green;      /* 枠線の太さ、種類、色 */
+  background-color: honeydew;    /* 背景色 */
+  padding: 20px;                    /* 内側の余白 */
+  border-radius: 8px;               /* 角丸 */
+  color: #1e293b;                 /* 文字色 */
+}
+
+/*============================================================
+ * 文字装飾
+ *===========================================================*/
+/* 文字赤 */
+ .red-bold-text {
+  color: red;        /* 文字色を赤にする */
+  font-weight: bold; /* 文字を太字にする */
+}
+
+/* 文字青 */
+ .blue-bold-text {
+  color: blue;        /* 文字色を赤にする */
+  font-weight: bold; /* 文字を太字にする */
+}

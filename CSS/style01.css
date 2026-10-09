@@ -1,0 +1,115 @@
+/* ページ全体 */
+body {
+    font-family: "メイリオ", Meiryo, sans-serif;
+}
+
+/*----------------------------------------------------------
+ *  Boxの回りの線　検証用
+ *---------------------------------------------------------*/
+/*
+ div {
+    border: 1px solid #333; /* 線の太さ、線の種類、色を指定 */
+}
+*/
+
+/* 表題Box */
+.title-box {
+    background-color: Navy;
+    color: white ;
+    font-weight: bold;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+}
+
+/* CSS */
+.profile-thumb {
+  width: 150px;
+  height: 150px;
+  object-fit: cover; /* 画像を歪ませずに指定サイズに収めるプロパティ */
+}
+
+/*h2*/
+h2{
+    background-color: Blue;
+    color: White ;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+/*midasi2*/
+.midasi2{
+    font-size: 20px;
+    background-color: cyan;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+/*midasi3*/
+.midasi3{
+    font-size: 20px;
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+/*midasi4*/
+.midasi4{
+    font-size: 20px;
+    background-color: springgreen;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+/*Box 赤*/
+.box_red{
+    border: 3px solid Red;
+    background-color: floralwhite;
+    font-size: 20px;
+    color: Red ;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+/*ノーマルボックス*/
+.box_normal{
+    background-color: ivory;
+    color: black;
+    font-size: 16px;
+    padding: 5px;
+}
+
+/*ノーマルボックス　写真中央*/
+.box_normal_IMG{
+    /* 👇ここが真ん中寄せの指定 */
+    display: flex;
+    justify-content: center; /* 左右の真ん中 */
+    align-items: center;     /* 上下の真ん中 */
+
+    padding: 5px;
+}
+
+/*-----------------------------------------------------------------------------------
+ *写真
+ *---------------------------------------------------------------------------------*/
+.my-photo {
+    border: 1px solid Black;
+    width: 300px;            /* 横幅を300pxに固定 */
+    height: auto;             /* 高さは比率に合わせて自動調整 */
+    border-radius: 10px; /* お好みで角を丸くするなどの装飾も可能 */
+}
+
+.my-photo1200 {
+    border: 1px solid Black;
+    width: 1200px;            /* 横幅を1200pxに固定 */
+    height: auto;             /* 高さは比率に合わせて自動調整 */
+    border-radius: 10px; /* お好みで角を丸くするなどの装飾も可能 */
+}
