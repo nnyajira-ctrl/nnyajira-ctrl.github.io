@@ -1,25 +1,95 @@
-/* ページ全体 */
+/*******************************************************************************
+ *  全体のデザイン
+ ******************************************************************************/
+/*----------------------------------------------------------------------------------
+* ページ全体のデザイン
+*----------------------------------------------------------------------------------*/
 body {
     font-family: "メイリオ", Meiryo, sans-serif;
 }
 
+/*----------------------------------------------------------------------------------
+* ヘッダーのデザイン
+*----------------------------------------------------------------------------------*/
+header {
+    background-color:floralwhite;/* 背景色 */
+    border: 2px solid orange;    /* 例：太さ 2px / 実線 / 黒色 */
+    padding: 20px;
+    width: 100%;
+}
+
+        /* ボックス（コンテナ） */
+        .header-box {
+            max-width: 1200px;        /* ボックスの最大幅（任意で調整してください） */
+            margin: 0 auto;                /* 左右中央に配置 */
+            display: flex;                     /* 内部の要素を横並びにする */
+            justify-content: flex-end;  /* 中身を右端に寄せる */
+            align-items: flex-start;      /* 上揃えにする場合 */
+        }
+
+        /* お問い合わせコンテンツ部分のスタイル調整（必要に応じて） */
+        .contact-area {
+            text-align: left; /* テキスト自体は左揃えにする場合 */
+        }
+
+        .contact-area b {
+            font-size: 1.1em;
+        }
+
+        .contact-area p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .contact-area a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .contact-area a:hover {
+            text-decoration: underline;
+        }
+
+/*----------------------------------------------------------
+ *  Box二等分　ボックスの中にボックスを並列して置く
+ *---------------------------------------------------------*/
+    /* 親コンテナ */
+    .header_container {
+        display: flex; /* 横並びにする */
+        width: 100%;   /* 横幅いっぱいに広げる */
+        /*border: 1px solid #ccc; /* 枠線（確認用） */
+    }
+
+    /* 左右のボックス共通設定 */
+    .box {
+        flex: 1;       /* 均等に二等分する */
+        padding: 20px; /* 余白 */
+        box-sizing: border-box; /* パディングを含めて幅を計算 */
+    }
+
+    /* 左のボックス（左詰め） */
+    .left-box {
+        text-align: left;
+        /*background-color: RED; /* 背景色（確認用） */
+    }
+
+    /* 右のボックス（右詰め） */
+    .right-box {
+        text-align: right;
+        /*background-color: BLUE; /* 背景色（確認用） */
+    }
+
 /*----------------------------------------------------------
  *  Boxの回りの線　検証用
  *---------------------------------------------------------*/
-/*
- div {
-    border: 1px solid #333; /* 線の太さ、線の種類、色を指定 */
-}
-*/
-
 /* 表題Box */
 .title-box {
-    background-color: Navy;
-    color: white ;
-    font-weight: bold;
-    padding: 20px;
-    margin-bottom: 30px;
-    border-radius: 8px;
+    background-color:navy;/* 背景色 */
+    color: white;                   /* 文字色を青に指定 */
+    font-size: 30pt;              /* 文字サイズを16pxに指定 */
+    text-align: center;          /* センタリング */
+    border: 2px solid #000000;    /* 例：太さ 2px / 実線 / 黒色 */
+    width: 100%;                   /* 横幅を100%に指定 */
 }
 
 /* CSS */
