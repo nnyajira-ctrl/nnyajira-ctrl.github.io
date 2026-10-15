@@ -84,12 +84,22 @@ header {
  *---------------------------------------------------------*/
 /* 表題Box */
 .title-box {
-    background-color:navy;/* 背景色 */
-    color: white;                   /* 文字色を青に指定 */
+    background-color:navy;      /* 背景色 */
+    color: white;               /* 文字色を青に指定 */
     font-size: 30pt;              /* 文字サイズを16pxに指定 */
-    text-align: center;          /* センタリング */
-    border: 2px solid #000000;    /* 例：太さ 2px / 実線 / 黒色 */
+    text-align: center;           /* センタリング */
+    border: 2px solid #000000;  /* 例：太さ 2px / 実線 / 黒色 */
     width: 100%;                   /* 横幅を100%に指定 */
+}
+
+/* 回数Box */
+.numberOfTimesBox {
+    background-color:aqua;       /* 背景色 */
+    color: black;                /* 文字色を黒に指定 */
+    font-size: 20pt;                /* 文字サイズを16pxに指定 */
+    text-align: left;               /* 左揃え */
+    border: 2px solid blue;       /* 例：太さ 2px / 実線 / 青色 */
+    width: 100%;                    /* 横幅を100%に指定 */
 }
 
 /* CSS */
