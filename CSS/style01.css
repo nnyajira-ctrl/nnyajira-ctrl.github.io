@@ -73,6 +73,13 @@ header {
         /*background-color: RED; /* 背景色（確認用） */
     }
 
+    .left-box-Blue {
+        text-align: left;
+        font-weight: bold; /* フォントを太字にする */
+        color: blue;       /* 文字色を青にする */
+        /*background-color: RED; /* 背景色（確認用） */
+    }
+
     /* 右のボックス（右詰め） */
     .right-box {
         text-align: right;
