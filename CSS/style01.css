@@ -171,10 +171,24 @@ h2{
 .box_normal{
     background-color: ivory;
     color: black;
-    font-size: 16px;
     padding: 5px;
 }
 
+.box_textnormal{
+    background-color: ivory;
+    color: black;
+    marging-top:5px;
+    padding: 20px;
+}
+
+/* ボックス内の文字を小さくする*/
+.box_mozisyou{
+    font-size: 10pt;              /* 文字サイズを16pxに指定 */
+    background-color: ivory;
+    color: black;
+    marging-top:5px;
+    padding: 20px;
+}
 /*ノーマルボックス　写真中央*/
 .box_normal_IMG{
     /* 👇ここが真ん中寄せの指定 */

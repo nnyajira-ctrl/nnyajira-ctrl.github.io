@@ -48,8 +48,40 @@
         </header>
         
         <main>
-        
-        </main>
+			<div class="midasi2">
+				１，MVCモデルとSpring MVCの違い
+			</div>
+			<div class="box_textnormal">
+				　誤解している方々が多いですね。<br>
+				MVCのModelと、Spring MVCのModelは、全く別物です。<br>
+				この誤解は、MVCと、Spring MVCを同列に見ている事から生じる誤解です。<br>
+				MVCは目標で、Spring MVCは手段です。<br>
+			</div>
+
+			<div class="midasi2">
+				２，Spring MVCのServiceの役割
+			</div>
+			<div class="box_textnormal">
+				簡単に言えば、何でもかんでもControllerに書くのではなく、<b class="red-bold-text">Controllerは「ユーザーからのリクエストを受け取り、Serviceに処理を依頼し、結果を返す」</b>という役割に徹するべきです。<br>
+				この、異様に膨らんだControllerを<b class="red-bold-text">「Fat Controller（太ったコントローラー）」</b>と呼びます。<br>
+				<br>
+				
+				細かい事を言えば、下記のような役割を担います。が、気にする事はありません。<br>
+				このシステム固有の処理を書けば良いのですよ。<br><br>
+			
+				<ol class="box_mozisyou">
+					<li class="red-bold-text">ビジネスロジックのカプセル化</li>
+		            	データの計算、業務ルールに基づくバリデーション、複数の処理を組み合わせた一連のワークフローなど、システム固有の「やりたいこと（業務）」をここに記述します。<br><br>
+					<li class="red-bold-text">トランザクシ管理（@Transactional）</li>
+						データベースへの書き込みや更新が複数にまたがる際、「すべて成功したら確定（コミット）、途中でエラーが起きたらすべて取り消し（ロールバック）」というトランザクション制御を宣言的に行います。<br><br>
+					<li class="red-bold-text">データアクの調停（Repositoryの統合）</li>
+						Controllerからリクエストを受け取ると、必要に応じて複数のRepository（データアクセス層）を呼び出し、データを加工してControllerへ返します。Controllerを「薄く（Thin Controller）」保つ役割があります。<br><br>
+					<li class="red-bold-text">他システムや外部APIとの連携</li>
+						メール送信、外部APIの呼び出し、ファイル処理など、データベース操作以外のビジネスプロセスを統括します。<br><br>
+				</ol>
+			
+			</div>
+		</main>
         
     </body>
 </html>
