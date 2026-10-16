@@ -79,9 +79,33 @@
 					<li class="red-bold-text">他システムや外部APIとの連携</li>
 						メール送信、外部APIの呼び出し、ファイル処理など、データベース操作以外のビジネスプロセスを統括します。<br><br>
 				</ol>
-			
 			</div>
+
+			<div class="midasi2">
+				３，Sample03 シナリオ
+			</div>
+			<div class="box_Scenario">
+				１，ブラウザから http://localhost:8080/newmember へ GETリクエストを送信する。<br>
+				２，<b class="blue-bold-text">Sample03Controller</b> の <b class="green-bold-text">@GetMapping</b>("newmember") アノテーションがついたメソッド <b class="blue-bold-text">sample0301()</b> が起動する。<br>
+				３，<b class="blue-bold-text">sample0301()</b> は、空の <b class="blue-bold-text">MemberForm</b> インスタンスを <b class="red-bold-text">Model</b> に追加し、<b class="blue-bold-text">newmember.html</b> に遷移する。<br>
+				４，<b class="blue-bold-text">newmember.html</b> は、<b class="red-bold-text">Thymeleaf</b> を用いて作成され、<b class="red-bold-text">Model</b> のフォームデータを画面にバインドする。<br>
+				５，ユーザーはブラウザから必要事項を入力し、サーバーに送信する。<br>
+				６，<b class="blue-bold-text">Sample03Controller</b> の <b class="green-bold-text">@PostMapping</b>("/newmemberResult") アノテーションがついたメソッド <b class="blue-bold-text">sample0301Result()</b> が起動する。<br>
+					<b class="blue-bold-text">sample0301Result()</b> は、クライアントから送られてきた値（フォームデータ）を受け取る。<br>
+					<b class="red-bold-text">Service</b> の <b class="blue-bold-text">sample0301Service</b> に 生年月日 を引数として渡す。<br>
+				７，<b class="blue-bold-text">sample0301Service</b> は、受け取った 生年月日 から 年齢 を計算し、<b class="blue-bold-text">sample0301Result()</b> に返す。<br>
+				８，<b class="blue-bold-text">sample0301Result()</b> は、<b class="red-bold-text">Model</b> に 年齢をセットし、<b class="blue-bold-text">newMemberResult.html</b> に遷移する。<br>
+				９，<b class="blue-bold-text">newMemberResult.html</b> は、<b class="red-bold-text">Model</b> に渡されたデータを <b class="red-bold-text">Thymeleaf</b> で展開し表示する。<br>
+				１０，処理を終了する。<br>
+			</div>
+
+			<div class="midasi2">
+				４，Sample03 シーケンス図
+			</div>
+				<div class="box_normal_IMG">
+					<img src="../IMG/Sample03シーケンス図03.png" alt="Sample03のシーケンス図">
+				</div>
+
 		</main>
-        
-    </body>
+            </body>
 </html>

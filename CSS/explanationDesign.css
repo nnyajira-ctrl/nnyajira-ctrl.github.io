@@ -78,3 +78,9 @@
   color: blue;        /* 文字色を赤にする */
   font-weight: bold; /* 文字を太字にする */
 }
+
+/* 文字青 */
+ .green-bold-text {
+  color: green;        /* 文字色を赤にする */
+  font-weight: bold; /* 文字を太字にする */
+}

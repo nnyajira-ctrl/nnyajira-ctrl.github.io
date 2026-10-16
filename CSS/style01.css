@@ -189,13 +189,21 @@ h2{
     marging-top:5px;
     padding: 20px;
 }
+
+.box_Scenario{
+    background-color: lightcyan;
+    color: black;
+    marging-top:5px;
+    padding: 20px;
+}
+
 /*ノーマルボックス　写真中央*/
 .box_normal_IMG{
     /* 👇ここが真ん中寄せの指定 */
     display: flex;
     justify-content: center; /* 左右の真ん中 */
     align-items: center;     /* 上下の真ん中 */
-
+     background-color: ivory;
     padding: 5px;
 }
 
