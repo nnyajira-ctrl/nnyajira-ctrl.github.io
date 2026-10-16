@@ -31,6 +31,6 @@
 /*プログラムコードの表示*/
 pre {
   text-align: left;       /* 中のテキストを左揃えにする */
-  margin-left: 0;         /* 左の余白をなくす */
+  margin-left: 10px ;         /* 左の余白をなくす */
   margin-right: auto;     /* 右の余白を自動にして左に寄せる */
 }

@@ -86,7 +86,7 @@
 			</div>
 			<div class="box_Scenario">
 				１，ブラウザから http://localhost:8080/newmember へ GETリクエストを送信する。<br>
-				２，<b class="blue-bold-text">Sample03Controller</b> の <b class="green-bold-text">@GetMapping</b>("newmember") アノテーションがついたメソッド <b class="blue-bold-text">sample0301()</b> が起動する。<br>
+				２，<b class="blue-bold-text">Sample03Controller</b> の <b class="green-bold-text">@GetMapping</b>("/newmember") アノテーションがついたメソッド <b class="blue-bold-text">sample0301()</b> が起動する。<br>
 				３，<b class="blue-bold-text">sample0301()</b> は、空の <b class="blue-bold-text">MemberForm</b> インスタンスを <b class="red-bold-text">Model</b> に追加し、<b class="blue-bold-text">newmember.html</b> に遷移する。<br>
 				４，<b class="blue-bold-text">newmember.html</b> は、<b class="red-bold-text">Thymeleaf</b> を用いて作成され、<b class="red-bold-text">Model</b> のフォームデータを画面にバインドする。<br>
 				５，ユーザーはブラウザから必要事項を入力し、サーバーに送信する。<br>
@@ -105,6 +105,54 @@
 				<div class="box_normal_IMG">
 					<img src="../IMG/Sample03シーケンス図03.png" alt="Sample03のシーケンス図">
 				</div>
+
+			<div class="midasi2">
+				５，Sample03Controller のコード
+			</div>
+			<div class="program-box">
+				<pre>
+package com.example.demo.controller;
+
+import com.example.demo.form.MemberForm;
+import com.example.demo.service.Sample03Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+<b class="green-bold-text">@Controller</b>
+<b class="blue-bold-text">public class Sample03Controller</b> {
+
+    <b class="green-bold-text">@Autowired</b>
+    <b class="blue-bold-text">private Sample03Service sample03Service</b>;
+
+    // 1, 2, 3: GETリクエストを受け取り、空のMemberFormをModelに追加してnewmember.htmlへ遷移
+    <b class="green-bold-text">@GetMapping</b>("/newmember")
+    <b class="blue-bold-text">public String sample0301(Model model)</b> {
+        model.addAttribute("memberForm", new MemberForm());
+        return "newmember";
+    }
+
+    // 5, 6, 7, 8: POSTリクエストでデータを受け取り、Serviceで年齢計算を行い、Modelにセットして結果画面へ遷移
+    <b class="green-bold-text">@PostMapping</b>("/newmemberResult")
+    <b class="blue-bold-text">public String sample0301Result(</b><b class="green-bold-text">@ModelAttribute</b> <b class="blue-bold-text">MemberForm memberForm, Model model) </b>{
+        // Serviceの呼び出し (生年月日を渡し、年齢を受け取る)
+        String age = sample03Service.sample0301Service(memberForm.getBirthDate());
+        
+        // 年齢をフォーム（またはModel）にセット
+        memberForm.setAge(age);
+        
+        // Modelにオブジェクトを追加
+        model.addAttribute("memberForm", memberForm);
+        
+        return "newMemberResult";
+    }
+}
+				</pre>
+			</div>
+
 
 		</main>
      </body>
