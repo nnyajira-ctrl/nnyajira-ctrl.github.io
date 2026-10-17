@@ -153,7 +153,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 				</pre>
 			</div>
 
-
+			<div class="midasi3">
+				プログラムの解説
+			</div>
+			<div class="midasi4">
+				@Autowired<br>
+				private Sample03Service sample03Service;
+			</div>
+			<div class="box_textnormal">
+				<b class="red-bold-text">@Autowired</b> アノテーションは、Springの依存性注入（DI）を利用して、<b class="blue-bold-text">Sample03Service</b> クラスのインスタンスを自動的に注入するために使用されます。<br>
+				これにより、<b class="blue-bold-text">Sample03Controller</b> 内で <b class="blue-bold-text">sample03Service</b> を直接使用できるようになります。<br>
+				<br>
+				<b class="red-bold-text">private Sample03Service sample03Service; に new がない理由</b>は、<b class="red-bold-text">「自分で new（インスタンス化）しなくても、Spring Bootが代わりに作って自動で当てはめてくれるから」</b>です。<br>
+				通常、Javaプログラミングではオブジェクトを使うときに new キーワードを使いますよね。しかし、Spring Bootの「DI（依存性注入）」という仕組みを使っている場所では、この new を書く必要がなくなります。
+			</div>
 		</main>
      </body>
 </html>

@@ -139,21 +139,25 @@ h2{
 /*midasi3*/
 .midasi3{
     font-size: 20px;
-    background-color: yellow;
+    border: solid 3px yellow; /*線*/
+    border-radius: 8px;
+    background-color: lightyellow;
     color: black;
     font-weight: bold;
     padding: 5px;
-    border-radius: 8px;
+    margin-top: 20px;    /* 上の空白 */
 }
 
 /*midasi4*/
 .midasi4{
     font-size: 20px;
-    background-color: springgreen;
+    border: solid 3px Green; /*線*/
+    border-radius: 8px;
+    background-color: honeydew;
     color: black;
     font-weight: bold;
     padding: 5px;
-    border-radius: 8px;
+    margin-top: 20px;    /* 上の空白 */
 }
 
 /*Box 赤*/
