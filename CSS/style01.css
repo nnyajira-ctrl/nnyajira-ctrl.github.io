@@ -207,7 +207,7 @@ h2{
     display: flex;
     justify-content: center; /* 左右の真ん中 */
     align-items: center;     /* 上下の真ん中 */
-     background-color: ivory;
+    background-color: ivory;
     padding: 5px;
 }
 
