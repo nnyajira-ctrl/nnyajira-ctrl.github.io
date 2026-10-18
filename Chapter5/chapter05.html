@@ -167,6 +167,81 @@ import org.springframework.web.bind.annotation.PostMapping;
 				<b class="red-bold-text">private Sample03Service sample03Service; に new がない理由</b>は、<b class="red-bold-text">「自分で new（インスタンス化）しなくても、Spring Bootが代わりに作って自動で当てはめてくれるから」</b>です。<br>
 				通常、Javaプログラミングではオブジェクトを使うときに new キーワードを使いますよね。しかし、Spring Bootの「DI（依存性注入）」という仕組みを使っている場所では、この new を書く必要がなくなります。
 			</div>
+
+			<div class="box_normal_IMG">
+				<img src="../IMG/Autowiredの仕組み.jpeg" alt="Autowiredの仕組み">
+			</div>
+			<div class="box_textnormal">
+				<ol>
+					<li>
+						画面の中央におおきな長方形があります。<br>
+						このエリアはメモリの中にある「Springが管理している領域」を表しています。
+					</li>
+					<li>
+						長方形のSpring管理領域の右側に、「@Service、@Bean」のプログラムがあります。<br>
+						それらをインスタンス化して結果を「Springが管理している領域」に登録します。
+					</li>
+					<li>
+						「Springが管理している領域」の左側の「@Autowired」は、「Springが管理している領域」とつなぎます。
+					</li>
+				</ol>
+			</div>
+
+			<div class="midasi2">
+				６，Sample03Service のコード
+			</div>
+			<div class="program-box">
+				<pre>
+package com.example.demo.service;
+
+import org.springframework.stereotype.Service;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
+<b class="red-bold-text">@Service</b>
+<b class="blue-bold-text">public class Sample03Service</b> {
+
+    /**
+     * 生年月日から年齢を計算する
+     * @param birthDateStr 生年月日 ("yyyy-MM-dd" 形式を想定)
+     * @return 年齢
+     */
+    <b class="blue-bold-text">public int sample0301Service(String birthDateStr)</b> {
+        if (birthDateStr == null || birthDateStr.isEmpty()) {
+            return 0;
+        }
+        LocalDate birthDate = LocalDate.parse(birthDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate currentDate = LocalDate.now();
+        return Period.between(birthDate, currentDate).getYears();
+    }
+}				</pre>
+			</div><br>
+
+			<div class="midasi2">
+				７，フォームクラス (MemberForm.java) のコード
+			</div>
+			<div class="program-box">
+				<pre>
+package com.example.demo.form;
+
+<b class="red-bold-text">import lombok.Data;</b>
+
+<b class="red-bold-text">@Data</b>
+public class MemberForm {
+    private String kanjiSei;   // 漢字姓
+    private String kanjiMei;   // 漢字名
+    private String kanaSei;    // カナ姓
+    private String kanaMei;    // カナ名
+    <b class="blue-bold-text">private String birthDate;  // 生年月日 (例: "1990-01-01")</b>
+	<b class="blue-bold-text">private String age;        // 年齢 新しく追加されたフィールド</b>
+    private String postalCode; // 郵便番号
+    private String address;    // 住所
+}				</pre>
+
+Lombokは便利です。setterやgetterを自動生成してくれるので、コードがすっきりします。<br>
+			</div><br>
+
 		</main>
      </body>
 </html>
