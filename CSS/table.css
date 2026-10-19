@@ -22,7 +22,7 @@
 
 /* 個々のセル（Box）の共通スタイル */
 .custom-box-cell {
-    flex: 1 1 auto;         / 3つのセルを均等幅にする */
+    flex: 1 1 auto;         /* 3つのセルを均等幅にする */
     padding: 1rem;
     border-right: 1px solid #212529;
 }
@@ -42,10 +42,11 @@
     background-color: lightcyan;
 }
 
-/*テーブルのセルをbackground-color: cyan*/
+/*テーブルのセルをbackground-color: */
 .table-cell-cyan{
-    background-color: #ff9999;
+    background-color: lightcyan;
     font-weight: bold;
+    text-align: center;
 }
 
 /*<td>の中に写真の横に文字を表示する*/

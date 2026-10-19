@@ -136,6 +136,18 @@ h2{
     border-radius: 8px;
 }
 
+/*midasi2-1*/
+.midasimidasi2-1{
+    font-size: 20px;
+    border: solid 3px Red; /*線*/
+    border-radius: 8px;
+    background-color: pink;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+    margin-top: 20px;    /* 上の空白 */
+}
+
 /*midasi3*/
 .midasi3{
     font-size: 20px;
@@ -181,7 +193,7 @@ h2{
 .box_textnormal{
     background-color: ivory;
     color: black;
-    marging-top:5px;
+    margin-top:5px;
     padding: 20px;
 }
 
@@ -190,14 +202,14 @@ h2{
     font-size: 10pt;              /* 文字サイズを16pxに指定 */
     background-color: ivory;
     color: black;
-    marging-top:5px;
+    margin-top:5px;
     padding: 20px;
 }
 
 .box_Scenario{
     background-color: lightcyan;
     color: black;
-    marging-top:5px;
+    margin-top:5px;
     padding: 20px;
 }
 
