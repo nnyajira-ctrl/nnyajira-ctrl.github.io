@@ -131,8 +131,8 @@ import org.springframework.web.bind.annotation.PostMapping;
     // 1, 2, 3: GETリクエストを受け取り、空のMemberFormをModelに追加してnewmember.htmlへ遷移
     <b class="green-bold-text">@GetMapping</b>("/newmember")
     <b class="blue-bold-text">public String sample0301(Model model)</b> {
-        model.addAttribute("memberForm", new MemberForm());
-        return "newmember";
+        model.addAttribute("memberForm", <b class="red-bold-text">new MemberForm()</b>);
+        return "newmember";              <b style="font-style: italic;">奇妙に見えるかもしれませんが、Javaはインスタンス化しないと動きませんからね。</b>
     }
 
     // 5, 6, 7, 8: POSTリクエストでデータを受け取り、Serviceで年齢計算を行い、Modelにセットして結果画面へ遷移
@@ -240,6 +240,94 @@ public class MemberForm {
 }				</pre>
 
 Lombokは便利です。setterやgetterを自動生成してくれるので、コードがすっきりします。<br>
+			</div><br>
+
+			<div class="midasi2">
+				８，HTMLテンプレート（入力画面） (src/main/resources/templates/newmember.html)
+			</div>
+			<div class="program-box">
+				<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;新規会員登録&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;新規会員登録入力&lt;/h1&gt;
+    &lt;form <b class="red-bold-text">th:action="@{/newmemberResult}" th:object="${memberForm}"</b> method="post"&gt;	
+        &lt;div&gt;
+            &lt;label&gt;漢字姓: &lt;input type="text" th:field="*{kanjiSei}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;漢字名: &lt;input type="text" th:field="*{kanjiMei}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;カナ姓: &lt;input type="text" th:field="*{kanaSei}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;カナ名: &lt;input type="text" th:field="*{kanaMei}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            <b class="blue-bold-text">&lt;label&gt;生年月日: &lt;input type="date" th:field="*{birthDate}" /&gt;&lt;/label&gt;</b>
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;郵便番号: &lt;input type="text" th:field="*{postalCode}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;label&gt;住所: &lt;input type="text" th:field="*{address}" /&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;button type="submit"&gt;送信&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+				</pre>
+			</div><br>
+			<div class="midasi3">
+				プログラムの解説
+			</div>
+			<div class="midasi4">
+				th:action="@{/newmemberResult}" ＊わざわざThymleafを使う理由＊
+			</div>
+			<div class="box_textnormal">
+				開発時点のURLとデプロイ時のURLの違いに自動で対応してくれる優れものです。<br>
+				勘違いしないで欲しいのですが、開発中にフォルダーを変更してもそれに対応してくれるわけではありません。
+			</div>
+			<div class="midasi4">
+				th:object="${memberForm}
+			</div>
+			<div class="box_textnormal">
+				Javaのコントローラーから渡されたオブジェクト（データの入れ物）と、HTMLのフォーム（&lt;form&gt;タグ）を紐付ける（バインドする）ための機能です。
+			</div>
+
+			<div class="midasi2">
+				９，HTMLテンプレート（結果画面） (src/main/resources/templates/newMemberResult.html)
+			</div>
+			<div class="program-box">
+				<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;登録結果&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;新規会員登録結果&lt;/h1&gt;
+    &lt;p&gt;以下の内容で受け付けました。&lt;/p&gt;
+    &lt;ul&gt;
+        &lt;li&gt;漢字氏名: &lt;span th:text="${memberForm.kanjiSei} + ' ' + ${memberForm.kanjiMei}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;カナ氏名: &lt;span th:text="${memberForm.kanaSei} + ' ' + ${memberForm.kanaMei}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;生年月日: &lt;span th:text="${memberForm.birthDate}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;年齢: &lt;span th:text="${age}"&gt;&lt;/span&gt;歳&lt;/li&gt;
+        &lt;li&gt;郵便番号: &lt;span th:text="${memberForm.postalCode}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;住所: &lt;span th:text="${memberForm.address}"&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;&lt;a th:href="@{/newmember}"&gt;入力画面に戻る&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+				</pre>
 			</div><br>
 
 		</main>
