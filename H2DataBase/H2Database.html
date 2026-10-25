@@ -29,81 +29,80 @@
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a href="#section1" class="nav-link text-white p-0">１，H2データベースの概要</a></li>
                         <li class="nav-item mb-2"><a href="#section2" class="nav-link text-white p-0">２，H2データベースのダウンロード・インストール</a></li>
-                        <li class="nav-item mb-2"><a href="#section3" class="nav-link text-white p-0">目次項目 3</a></li>
-                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-white p-0">目次項目 4</a></li>
-                        <li class="nav-item mb-2"><a href="#section5" class="nav-link text-white p-0">目次項目 5</a></li>
+                        <li class="nav-item mb-2"><a href="#section3" class="nav-link text-white p-0">３，H2データベースの接続</a></li>
                     </ul>
                 </nav>
 
                 <!-- 中央の解説エリア (10/12 = 約83.3% ※ここがスクロール) -->
                 <main class="col-10 custom-main p-4 overflow-y-auto h-100">
                     <section id="section1" class="content-section">
-                        <h2 class="BlueChar">１、H2データベースの概要</h2>
-                        <div>
-                            H2データベースは、「ローカル開発」「単体・結合テスト」「プロトタイプの作成」において最大の効果を発揮します。<br>
-                            一方で、高負荷が予想される商用サービスの本番環境や、本番DBと完全に同一の挙動が求められるシステムにおいては、最初から本番同等のRDBMS（Dockerコンテナ等を利用）を使用する方が安全です。
+                        <div class="Box_Container">
+                            <h2 class="BlueChar">１、H2データベースの概要</h2>
+                            <div>
+                                H2データベースは、「ローカル開発」「単体・結合テスト」「プロトタイプの作成」において最大の効果を発揮します。<br>
+                                一方で、高負荷が予想される商用サービスの本番環境や、本番DBと完全に同一の挙動が求められるシステムにおいては、最初から本番同等のRDBMS（Dockerコンテナ等を利用）を使用する方が安全です。
+                            </div>
                         </div>
                     </section>
 
                     <section id="section2" class="content-section">
-                        <h2 class="BlueChar">２，H2データベースのダウンロード・インストール</h2>
-                        <div>
-                            <b class="BlueChar">１，ダウンロード</b>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                            <!-- 左側：写真 -->
+                        <div class="Box_Container">
                             <div>
-                                <img src="./H2IMG/H2ダウンロード.png" alt="H2HP" class="img-fluid">
+                                <h2 class="BlueChar">２，H2データベースのダウンロード・インストール</h2>
                             </div>
-                            <!-- 右側：解説 -->
-                            <div class="flex-grow-1">
-                                <p><a href="https://h2database.com/html/main.html" target="_blank" rel="noopener noreferrer">H2 Database 公式サイト</a></p>
-                                <p><b class="BlueChar">https://h2database.com/html/main.html</b></p>
-                                <p>Windowsインストーラを使うと楽ですよ。</p>
+                            <div>
+                                <b class="BlueChar">１，ダウンロード</b>
                             </div>
-                        </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <!-- 左側：写真 -->
+                                <div>
+                                    <img src="./H2IMG/H2ダウンロード.png" alt="H2HP" class="img-fluid">
+                                </div>
+                                <!-- 右側：解説 -->
+                                <div class="flex-grow-1">
+                                    <p><a href="https://h2database.com/html/main.html" target="_blank" rel="noopener noreferrer">H2 Database 公式サイト</a></p>
+                                    <p><b class="BlueChar">https://h2database.com/html/main.html</b></p>
+                                    <p>Windowsインストーラを使うと楽ですよ。</p>
+                                </div>
+                            </div><br>
 
-                        <div>
-                            <b class="BlueChar">２，インストール</b>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                            <!-- 左側：写真 -->
                             <div>
-                                <img src="./H2IMG/H2インストール 警告.png" alt="インストール時警告" class="img-fluid">
+                                <b class="BlueChar">２，インストール</b>
                             </div>
-                            <!-- 右側：解説 -->
-                            <div class="flex-grow-1">
-                                「Windows によって PC が保護されました」の警告が出た場合、<br>
-                                「詳細情報」をクリックすると、<br>
-                                下に「OK」ボタンが表示されます。<br>
-                                この「OK」ボタンをクリックします。<br>
-                            </div>
-                        </div>
-
-                        <div class="Box_Normal">
-                            <div>
-                                <b class="BlueChar">３，設定</b>
-                            </div>
-                            <div>
-                                <p><a href="https://h2database.com/html/quickstart.html" target="_blank" rel="noopener noreferrer">クイックスタート</a></p>
-                                <p><b class="BlueChar">https://h2database.com/html/quickstart.html</b></p>
+                            <div class="d-flex align-items-center gap-3">
+                                <!-- 左側：写真 -->
+                                <div>
+                                    <img src="./H2IMG/H2インストール 警告.png" alt="インストール時警告" class="img-fluid">
+                                </div>
+                                <!-- 右側：解説 -->
+                                <div class="flex-grow-1">
+                                    「Windows によって PC が保護されました」の警告が出た場合、<br>
+                                    「詳細情報」をクリックすると、<br>
+                                    下に「OK」ボタンが表示されます。<br>
+                                    この「OK」ボタンをクリックします。<br>
+                                </div>
                             </div>
                         </div>
                     </section>
 
                     <section id="section3" class="content-section">
-                        <h2>解説セクション 3</h2>
-                        <p>Bootstrapのユーティリティクラス（<code>vh-100</code>や<code>overflow-hidden</code>など）を組み合わせることで、高さを画面全体に固定したレイアウトが容易になります。</p>
-                    </section>
-
-                    <section id="section4" class="content-section">
-                        <h2>解説セクション 4</h2>
-                        <p>デザインや配色の微調整は、これまで通り <code>css/styleh2.css</code> に記述して上書き・拡張が可能です。</p>
-                    </section>
-
-                    <section id="section5" class="content-section">
-                        <h2>解説セクション 5</h2>
-                        <p>最後のセクションです。必要に応じて <code>col-3</code> と <code>col-9</code> に変更すれば3:9の比率にも簡単に切り替えられます。</p>
+                        <div class="Box_Container">
+                            <div>
+                                <h2 class="BlueChar">３，H2データベースの接続</h2>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <!-- 左側：写真 -->
+                                    <div>
+                                        <img src="./H2IMG/H2設定.png" alt="設定" class="img-fluid">
+                                    </div>
+                                    <!-- 右側：解説 -->
+                                    <div class="flex-grow-1">
+                                        左図の様に設定すればDBに接続できますよ。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
                 </main>
 
