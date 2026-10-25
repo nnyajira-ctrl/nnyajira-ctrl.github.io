@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>H2データベースの設定</title>
+        <!-- Bootstrap 5 CDNの読み込み -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- 独自のカスタムCSS -->
+        <link rel="stylesheet" href="./H2css/styleh2.css">
+        <link rel="stylesheet" href="./H2CSS/boxdesign.css">
+    </head>
+
+    <body class="d-flex flex-column vh-100 overflow-hidden">
+
+        <!-- ヘッダー (固定) -->
+        <header class="custom-header text-white px-4 d-flex align-items-center flex-shrink-0">
+            H2データベースの設定
+        </header>
+
+        <!-- メインコンテンツエリア (12分割) -->
+        <div class="container-fluid flex-grow-1 overflow-hidden p-0">
+            <div class="row h-100 g-0">
+                
+                <!-- 左サイドメニュー (2/12 = 約16.7%) -->
+                <nav class="col-2 custom-sidebar text-white p-3 overflow-y-auto h-100">
+                    <h5>サイドメニュー</h5>
+                    <hr>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#section1" class="nav-link text-white p-0">１，H2データベースの概要</a></li>
+                        <li class="nav-item mb-2"><a href="#section2" class="nav-link text-white p-0">２，H2データベースのダウンロード・インストール</a></li>
+                        <li class="nav-item mb-2"><a href="#section3" class="nav-link text-white p-0">目次項目 3</a></li>
+                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-white p-0">目次項目 4</a></li>
+                        <li class="nav-item mb-2"><a href="#section5" class="nav-link text-white p-0">目次項目 5</a></li>
+                    </ul>
+                </nav>
+
+                <!-- 中央の解説エリア (10/12 = 約83.3% ※ここがスクロール) -->
+                <main class="col-10 custom-main p-4 overflow-y-auto h-100">
+                    <section id="section1" class="content-section">
+                        <h2 class="BlueChar">１、H2データベースの概要</h2>
+                        <div>
+                            H2データベースは、「ローカル開発」「単体・結合テスト」「プロトタイプの作成」において最大の効果を発揮します。<br>
+                            一方で、高負荷が予想される商用サービスの本番環境や、本番DBと完全に同一の挙動が求められるシステムにおいては、最初から本番同等のRDBMS（Dockerコンテナ等を利用）を使用する方が安全です。
+                        </div>
+                    </section>
+
+                    <section id="section2" class="content-section">
+                        <h2 class="BlueChar">２，H2データベースのダウンロード・インストール</h2>
+                        <div>
+                            <b class="BlueChar">１，ダウンロード</b>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <!-- 左側：写真 -->
+                            <div>
+                                <img src="./H2IMG/H2ダウンロード.png" alt="H2HP" class="img-fluid">
+                            </div>
+                            <!-- 右側：解説 -->
+                            <div class="flex-grow-1">
+                                <p><a href="https://h2database.com/html/main.html" target="_blank" rel="noopener noreferrer">H2 Database 公式サイト</a></p>
+                                <p><b class="BlueChar">https://h2database.com/html/main.html</b></p>
+                                <p>Windowsインストーラを使うと楽ですよ。</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <b class="BlueChar">２，インストール</b>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <!-- 左側：写真 -->
+                            <div>
+                                <img src="./H2IMG/H2インストール 警告.png" alt="インストール時警告" class="img-fluid">
+                            </div>
+                            <!-- 右側：解説 -->
+                            <div class="flex-grow-1">
+                                「Windows によって PC が保護されました」の警告が出た場合、<br>
+                                「詳細情報」をクリックすると、<br>
+                                下に「OK」ボタンが表示されます。<br>
+                                この「OK」ボタンをクリックします。<br>
+                            </div>
+                        </div>
+
+                        <div class="Box_Normal">
+                            <div>
+                                <b class="BlueChar">３，設定</b>
+                            </div>
+                            <div>
+                                <p><a href="https://h2database.com/html/quickstart.html" target="_blank" rel="noopener noreferrer">クイックスタート</a></p>
+                                <p><b class="BlueChar">https://h2database.com/html/quickstart.html</b></p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="section3" class="content-section">
+                        <h2>解説セクション 3</h2>
+                        <p>Bootstrapのユーティリティクラス（<code>vh-100</code>や<code>overflow-hidden</code>など）を組み合わせることで、高さを画面全体に固定したレイアウトが容易になります。</p>
+                    </section>
+
+                    <section id="section4" class="content-section">
+                        <h2>解説セクション 4</h2>
+                        <p>デザインや配色の微調整は、これまで通り <code>css/styleh2.css</code> に記述して上書き・拡張が可能です。</p>
+                    </section>
+
+                    <section id="section5" class="content-section">
+                        <h2>解説セクション 5</h2>
+                        <p>最後のセクションです。必要に応じて <code>col-3</code> と <code>col-9</code> に変更すれば3:9の比率にも簡単に切り替えられます。</p>
+                    </section>
+                </main>
+
+            </div>
+        </div>
+
+    </body>
+</html>
