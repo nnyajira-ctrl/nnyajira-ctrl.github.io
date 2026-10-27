@@ -9,13 +9,24 @@
         <!-- 独自のカスタムCSS -->
         <link rel="stylesheet" href="./H2css/styleh2.css">
         <link rel="stylesheet" href="./H2CSS/boxdesign.css">
+        <link rel="stylesheet" href="../CSS/table.css">
+        <link rel="stylesheet" href="../CSS/explanationDesign.css">
     </head>
 
     <body class="d-flex flex-column vh-100 overflow-hidden">
 
         <!-- ヘッダー (固定) -->
         <header class="custom-header text-white px-4 d-flex align-items-center flex-shrink-0">
-            H2データベースの設定
+            <div class="d-flex align-items-center gap-3">
+                <!-- 左側：写真 -->
+                <div>
+                    <img src="./H2IMG/H2マーク.png" alt="H2" class="img-fluid">
+                </div>
+                <!-- 右側：解説 -->
+                <div class="flex-grow-1">
+                    <p><b><h1>データベースの設定</h1></b></p>
+                </div>
+            </div><br>
         </header>
 
         <!-- メインコンテンツエリア (12分割) -->
@@ -30,7 +41,11 @@
                         <li class="nav-item mb-2"><a href="#section1" class="nav-link text-white p-0">１，H2データベースの概要</a></li>
                         <li class="nav-item mb-2"><a href="#section2" class="nav-link text-white p-0">２，H2データベースのダウンロード・インストール</a></li>
                         <li class="nav-item mb-2"><a href="#section3" class="nav-link text-white p-0">３，H2データベースの接続</a></li>
+                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-white p-0">４，ユーザーID、パスワードの変更</a></li>
                     </ul>
+                    <div>
+                        <b><a href="../index.html">トップページへ</a></b>
+                    </div>
                 </nav>
 
                 <!-- 中央の解説エリア (10/12 = 約83.3% ※ここがスクロール) -->
@@ -38,7 +53,13 @@
                     <section id="section1" class="content-section">
                         <div class="Box_Container">
                             <h2 class="BlueChar">１、H2データベースの概要</h2>
-                            <div>
+                            <div class="Box_Normal">
+                                【主旨】<br>
+                                H2データベースのダウンロードからユーザーID、パスワードの変更までを解説します。<br>
+                                H2データベースは、Spring Bootのテストに使用するためです。<br>
+                                本格的に運用するなら、MySQL、MariaDB、PostgreSQL、Oracle等を使用することをお勧めします。
+                            </div>
+                            <div class="Box_Normal">
                                 H2データベースは、「ローカル開発」「単体・結合テスト」「プロトタイプの作成」において最大の効果を発揮します。<br>
                                 一方で、高負荷が予想される商用サービスの本番環境や、本番DBと完全に同一の挙動が求められるシステムにおいては、最初から本番同等のRDBMS（Dockerコンテナ等を利用）を使用する方が安全です。
                             </div>
@@ -104,8 +125,102 @@
                             </div>
                         </div>
                     </section>
+                
+                    <section id="section4" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="BlueChar">４，ユーザーID、パスワードの変更</h2>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td>１</td>
+                                        <td class="photo-box">
+                                            <img src="./H2IMG/H2設定01.png" alt="" class="img-fluid">
+                                        </td>
+                                        <td>
+                                            赤○の「H2 Console」を選択してください。
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>２</td>
+                                        <td class="photo-box">
+                                            <img src="./H2IMG/H2設定02.png" alt="" class="img-fluid">
+                                        </td>
+                                        <td>
+                                            左図の様に設定して下さい。<br>
+                                            設定が終わったら、一度「接続テスト」を試してみましょう。<br>
+                                            うまく接続できれば、今度は、「接続」をクリックしてください。
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>３</td>
+                                        <td class="photo-box">
+                                            <img src="./H2IMG/H2設定03.png" alt="" class="img-fluid">
+                                        </td>
+                                        <td>
+                                            <div class="Box_Normal">
+                                                <div>
+                                                    <b class="blue-bold-text ">1. パスワードの変更方法</b><br>
+                                                    パスワードを変更するには、H2コンソールなどのSQL実行画面から ALTER USER コマンドを実行します。
+                                                </div>
+                                                <div class="Box_Normal">
+                                                    <b class="blue-bold-text ">【SQL構文】</b><br>
+                                                    <b>ALTER USER ユーザー名 SET PASSWORD '新しいパスワード';</b>
+                                                </div>
+                                                <div class="Box_Normal">
+                                                    <b class="blue-bold-text ">【実行例（ユーザー sa のパスワードを newpassword に変更する場合）】</b><br>
+                                                    <b>ALTER USER sa SET PASSWORD 'newpassword';</b>
+                                                </div>
+                                                <div class="Box_Normal">
+                                                    <b class="blue-bold-text ">パスワードを無くして空（ブランク）にしたい場合は、''（空文字）を指定します。</b><br>
+                                                    <b>ALTER USER sa SET PASSWORD '';</b>
+                                                </div>
+                                            </div>
+                                            <div class="Box_Normal">
+                                                <div>
+                                                    <b class="blue-bold-text ">2. ユーザーID（ユーザー名）の変更方法</b><br>
+                                                    H2データベースには、ユーザー名を直接変更する専用のコマンド（RENAME USER など）は用意されていません。<br>
+                                                    そのため、ユーザーIDを変更したい場合は、新しいユーザーを作成して古いユーザーを削除する手順をとります。<br>
+                                                    ユーザーを追加するだけなら、この削除過程は不用です。
+                                                </div>
+                                                <div class="Box_Normal">
+                                                    <b class="green-bold-text ">１，新しいユーザーを作成する</b><br>
+                                                    <b>CREATE USER 新しいユーザー名 PASSWORD 'パスワード';</b>
+                                                </div>
+                                                <div class="Box_Normal">
+                                                    <b class="green-bold-text">２，必要に応じて権限を付与する（管理者権限が必要な場合など）</b><br>
+                                                    <b>ALTER USER 新しいユーザー名 ADMIN TRUE;</b>
+                                                </div>
+                                                <div class="Box_Normal">
+                                                    <b class="green-bold-text">３，古いユーザーを削除する</b><br>
+                                                    <b>DROP USER 古いユーザー名;</b>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>４</td>
+                                        <td>実行（Run）」ボタンをクリックします。</td>
+                                        <td>これにより、専用の管理画面はありませんが、実質的にWebブラウザの画面上だけでユーザー情報やパスワードの変更を行うことができます。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>５</td>
+                                        <td>アプリケーション（Spring Boot等）側の設定変更</td>
+                                        <td>
+                                            <div class="Box_Normal">
+                                                JavaやSpring BootなどからH2データベースに接続している場合、データベース側でパスワードやユーザーIDを変更しただけでは、アプリケーション側から接続できなくなります。<br>
+                                                プロジェクトの設定ファイル（例: src/main/resources/application.properties など）に記述されている接続情報も、変更後の内容に必ず更新してください。
+                                            </div>
+                                            <div class="Box_Normal">
+                                                <b class="blue-bold-text ">spring.datasource.username=新しいユーザー名</b><br>
+                                                <b class="blue-bold-text ">spring.datasource.password=新しいパスワード</b>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
                 </main>
-
             </div>
         </div>
 

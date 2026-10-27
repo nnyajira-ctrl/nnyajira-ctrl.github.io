@@ -31,3 +31,17 @@
    padding: 20px;
    border: 2px solid silver;
 }
+
+.photo-box {
+  padding: 10px;           /* 上下左右の余白を10pxに設定 */
+  /*background-color: #fff;*/  /* ボックスの背景色（必要に応じて変更） */
+  /*border: 1px solid #ddd;*/  /* 枠線（必要に応じて変更） */
+  /*display: inline-block;*/   /* 写真のサイズに合わせたボックスにする場合 */
+  box-sizing: border-box;  /* paddingを含めたサイズ計算にする */
+}
+
+.photo-box img {
+  display: block;          /* 画像の下部にできるわずかな隙間を消す */
+  max-width: 100%;         /* ボックスの幅に合わせて画像を縮小 */
+  height: auto;            /* 縦横比を維持したまま高さを自動調整 */
+}
