@@ -57,102 +57,91 @@
 
         <hr>
 
-        <div>
-			<h2>講座一覧</h2>
+        <!-- ▼ ここから2カラムレイアウトに変更 -->
+        <div class="row">
+            
+            <!-- 【左側】サイドメニュー -->
+            <div class="col-md-3 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <b>目次メニュー</b>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#lectures" class="text-decoration-none">講座一覧</a></li>
+                        <li class="list-group-item ps-4"><small><a href="#ch1" class="text-decoration-none text-secondary">第01回 シーケンス図</a></small></li>
+                        <li class="list-group-item ps-4"><small><a href="#ch2" class="text-decoration-none text-secondary">第02回 アノテーション</a></small></li>
+                        <li class="list-group-item ps-4"><small><a href="#ch3" class="text-decoration-none text-secondary">第03回 Spring MVC</a></small></li>
+                        <li class="list-group-item ps-4"><small><a href="#ch4" class="text-decoration-none text-secondary">第04回 View-Model-Controller</a></small></li>
+                        <li class="list-group-item ps-4"><small><a href="#ch5" class="text-decoration-none text-secondary">第05回 Service</a></small></li>
+                        <li class="list-group-item"><a href="#extra" class="text-decoration-none">おまけ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 【右側】メインコンテンツ -->
+            <div class="col-md-9">
+                <div id="lectures">
+                    <h2>講座一覧</h2>
+                </div>
+
+                <!-- 第01回 -->
+                <div id="ch1">
+                    <p>第０１回  シーケンス図を使おう</p>
+                </div>
+                <div>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/RF5SIMBWXgU" ...></iframe>
+                </div><br><br>
+
+                <!-- 第02回 -->
+                <div id="ch2">
+                    <p>第０２回  アノテーションは巨大なプログラム群</p>
+                </div>
+                <div>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/nE-740JDSBc" ...></iframe>
+                </div><br><br>
+
+                <!-- 第03回 -->
+                <div id="ch3">
+                    <p>第０３回  Spring MVC で整理整頓</p>
+                </div>
+                <div>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/kfCO4gES_y4" ...></iframe>
+                </div><br><br>
+
+                <!-- 第04回 -->
+                <div id="ch4">
+                    <p><a href="Chapter4/sample04.html">第０４回 View-Model-Controller</a></p>
+                </div>
+                <div>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/qQiJW4dEfhY" ...></iframe>
+                </div><br><br>
+
+                <!-- 第05回 -->
+                <div id="ch5">
+                    <p><a href="Chapter5/chapter05.html">第０５回 Spring BootのService</a></p>
+                </div>
+                <div>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Gpr7pHsomS8" ...></iframe>
+                </div><br><br>
+
+                <!-- おまけ -->
+                <div id="extra">
+                    <h2>おまけ</h2>
+                </div>
+                <div class="flowNormal-yellow">
+                    <a href="H2DataBase/H2Database.html">H2DataBaseの設定</a>
+                </div>
+            </div>
+
         </div>
-		<div>
-			<p>第０１回　 シーケンス図を使おう</p>
-		</div>
-		<div>
-			<iframe
-				width="560"
-				height="315"
-				src="https://www.youtube.com/embed/RF5SIMBWXgU"
-				title="YouTube video player"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-				referrerpolicy="strict-origin-when-cross-origin"
-				allowfullscreen>
-			</iframe>
-		</div><br><br>
+        <!-- ▲ 2カラムレイアウトここまで -->
 
-		<div>
-			<p>第０２回　 アノテーションは巨大なプログラム群</p>
-		</div>
-		<div>
-			<iframe
-				width="560"
-				height="315"
-				src="https://www.youtube.com/embed/nE-740JDSBc"
-				title="YouTube video player"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-				referrerpolicy="strict-origin-when-cross-origin"
-				allowfullscreen>
-			</iframe>
-		</div><br><br>
-
-		<div>
-			<p>第０３回　 Spring MVC　で整理整頓</p>
-		</div>
-		<div>
-			<iframe
-				width="560"
-				height="315"
-				src="https://www.youtube.com/embed/kfCO4gES_y4"
-				title="YouTube video player"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-				referrerpolicy="strict-origin-when-cross-origin"
-				allowfullscreen>
-			</iframe>
-		</div><br><br>
-
-		<div>
-			<p><a href="Chapter4/sample04.html">第０４回　View-Model-Controller</a></p>
-		</div>
-		<div>
-			<iframe 
-				width="560" 
-				height="315" 
-				src="https://www.youtube.com/embed/qQiJW4dEfhY" 
-				title="YouTube video player" 
-				frameborder="0" 
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-				referrerpolicy="strict-origin-when-cross-origin" 
-				allowfullscreen>
-			</iframe>
-		</div><br><br>
-
-		<div>
-			<p><a href="Chapter5/chapter05.html">第０５回　Spring BootのService</a></p>
-		</div>
-		<div>
-			<iframe 
-				width="560" 
-				height="315" 
-				src="https://www.youtube.com/embed/Gpr7pHsomS8" 
-				title="YouTube video player" 
-				frameborder="0" 
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-				referrerpolicy="strict-origin-when-cross-origin" 
-				allowfullscreen>
-			</iframe>
-		</div><br><br>
-
-        <div>
-			<h2>おまけ</h2>
-        </div>
-        <div class="flowNormal-yellow">
-			<a href="H2DataBase/H2Database.html">H2DataBaseの設定</a>
-        </div>
-
-		<!-- ここからがページの一番下（お問い合わせ欄） -->
-		<footer>
-			<small>
-				Copyright © 2023 Football History Archives. All Rights Reserved.
-			</small>
-		</footer>
+        <!-- ページの一番下（お問い合わせ欄） -->
+        <footer>
+            <small>
+                Copyright © 2023 Football History Archives. All Rights Reserved.
+            </small>
+        </footer>
     </div>
 </body>
 </html>
