@@ -8,9 +8,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- 独自のカスタムCSS -->
         <link rel="stylesheet" href="../CSS/style01.css">
-        <link rel="stylesheet" href="./Chapter7CSS/styleChapter7.css">
         <link rel="stylesheet" href="../CSS/explanationDesign.css">
+        <link rel="stylesheet" href="../CSS/table.css">
         <link rel="stylesheet" href="../H2DataBase/H2CSS/boxdesign.css">
+        <link rel="stylesheet" href="./Chapter7CSS/styleChapter7.css">
+        <link rel="stylesheet" href="./Chapter7CSS/chap7Table.css">
     </head>
 
     <body class="d-flex flex-column vh-100 overflow-hidden">
@@ -29,10 +31,10 @@
                     <h5>サイドメニュー</h5>
                     <hr>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#section1" class="nav-link text-black p-0">ニャジラの提案</a></li>
+                        <li class="nav-item mb-2"><a href="#section1" class="nav-link text-black p-0"><b class="RedChar">０，ニャジラの提案</b></a></li>
                         <li class="nav-item mb-2"><a href="#section2" class="nav-link text-black p-0">１，Sample04のシナリオ</a></li>
-                        <li class="nav-item mb-2"><a href="#section3" class="nav-link text-black p-0">３，H2データベースの接続</a></li>
-                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">４，ユーザーID、パスワードの変更</a></li>
+                        <li class="nav-item mb-2"><a href="#section3" class="nav-link text-black p-0">２，シーケンス図</a></li>
+                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">３，プロジェクトの前提設定（Spring Initializr）</a></li>
                     </ul>
                     <div>
                         <b><a href="../index.html">トップページへ</a></b>
@@ -109,6 +111,80 @@ Sample04 シナリオ
                             </div>
                         </div>
                     </section>
+
+                    <!-- Section 3-->
+                    <section id="section3" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">２，シーケンス図</h2>
+                            <div class="box_normal_IMG">
+                                <img src="./Chap7IMG/Sample04シーケンス図.png" alt="Sample04のシーケンス図">
+                            </div>
+                            <div class="box_normal">
+                                だいぶごちゃごちゃしてきました。<br>
+                                何度も申し上げますが、きれいに書くのが目的ではありません。<br>
+                                どういう流れで処理をするのかをシミュレーションするのが目的なのです。
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section ４-->
+                    <section id="section4" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">３，プロジェクトの前提設定（Spring Initializr）</h2>
+                            <div class="box_normal">
+                                <table>
+                                    <caption>
+                                        プロジェクトの前提設定
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">項目</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">１</th>
+                                            <td>IDE</td>
+                                            <td>Eclipse</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">２</th>
+                                            <td>Project</td>
+                                            <td>Maven</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">３</th>
+                                            <td>Dependencies</td>
+                                            <td>Spring Web、Thymeleaf、H2 Database、Lombok、<br>Spring Data JDBC（または Spring Data JPA / JDBC API）</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section ５-->
+                    <section id="section5" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">４，設定ファイル (src/main/resources/application.properties)</h2>
+                            <div class="box_normal">H2データベースの接続設定を行います。</div>
+                            <div class="program-box">
+                                spring.datasource.url=jdbc:h2:mem:testdb<br>
+                                spring.datasource.driverClassName=org.h2.Driver<br>
+                                spring.datasource.username=sa<br>
+                                spring.datasource.password=<br>
+                                spring.h2.console.enabled=true<br>
+                                spring.h2.console.path=/h2-console<br>
+                            </div>
+                            <div class="box_normal">
+                                正確には、「インメモリ接続」と言います。<br>
+                                主にH2 Databaseなどのインメモリデータベースに対してアプリケーションを接続し、データをハードディスクや外部サーバーではなく、Javaアプリケーションのメモリ（RAM）上で管理・処理する仕組みを指します。
+                            </div>
+                        </div>
+                    </section>
+
 
 
                 </main>
