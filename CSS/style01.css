@@ -148,6 +148,18 @@ h2{
     margin-top: 20px;    /* 上の空白 */
 }
 
+/*midasi2Red*/
+.midasiRed{
+    font-size: 30px;
+    border: solid 3px Red; /*線*/
+    border-radius: 8px;
+    background-color: pink;
+    color: black;
+    font-weight: bold;
+    padding: 5px 0px 5px 20px;
+    margin: 5px 0px 0px 5px;    /* 上の空白 */
+}
+
 /*midasi3*/
 .midasi3{
     font-size: 20px;
@@ -158,6 +170,16 @@ h2{
     font-weight: bold;
     padding: 5px;
     margin-top: 20px;    /* 上の空白 */
+}
+
+.midasi3Yellow{
+    font-size: 20px;
+    border: solid 3px yellow; /*線*/
+    border-radius: 8px;
+    background-color: lightyellow;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
 }
 
 /*midasi4*/

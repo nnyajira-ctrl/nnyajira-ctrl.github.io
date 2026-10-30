@@ -3,12 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>H2データベースの設定</title>
+        <title>Repository</title>
         <!-- Bootstrap 5 CDNの読み込み -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- 独自のカスタムCSS -->
+        <link rel="stylesheet" href="../CSS/style01.css">
         <link rel="stylesheet" href="./Chapter7CSS/styleChapter7.css">
         <link rel="stylesheet" href="../CSS/explanationDesign.css">
+        <link rel="stylesheet" href="../H2DataBase/H2CSS/boxdesign.css">
     </head>
 
     <body class="d-flex flex-column vh-100 overflow-hidden">
@@ -27,8 +29,8 @@
                     <h5>サイドメニュー</h5>
                     <hr>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#section1" class="nav-link text-black p-0">１，Sample04のシナリオ</a></li>
-                        <li class="nav-item mb-2"><a href="#section2" class="nav-link text-black p-0">２，H2データベースのダウンロード・インストール</a></li>
+                        <li class="nav-item mb-2"><a href="#section1" class="nav-link text-black p-0">ニャジラの提案</a></li>
+                        <li class="nav-item mb-2"><a href="#section2" class="nav-link text-black p-0">１，Sample04のシナリオ</a></li>
                         <li class="nav-item mb-2"><a href="#section3" class="nav-link text-black p-0">３，H2データベースの接続</a></li>
                         <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">４，ユーザーID、パスワードの変更</a></li>
                     </ul>
@@ -41,19 +43,74 @@
                 <main class="col-10 custom-main p-4 overflow-y-auto h-100">
                     <section id="section1" class="content-section">
                         <div class="Box_Container">
-                            <h2 class="BlueChar">１、Sample04のシナリオ</h2>
-                            <div class="Box_Normal">
-                                【主旨】<br>
-                                H2データベースのダウンロードからユーザーID、パスワードの変更までを解説します。<br>
-                                H2データベースは、Spring Bootのテストに使用するためです。<br>
-                                本格的に運用するなら、MySQL、MariaDB、PostgreSQL、Oracle等を使用することをお勧めします。
+                            <div class="midasiRed">
+                                ニャジラの提案
                             </div>
-                            <div class="Box_Normal">
-                                H2データベースは、「ローカル開発」「単体・結合テスト」「プロトタイプの作成」において最大の効果を発揮します。<br>
-                                一方で、高負荷が予想される商用サービスの本番環境や、本番DBと完全に同一の挙動が求められるシステムにおいては、最初から本番同等のRDBMS（Dockerコンテナ等を利用）を使用する方が安全です。
+                            <div class="midasi3Yellow">
+                                リレーショナルデータベースを扱うなら、やっぱり、データベースの勉強はした方が良いと思います。
+                            </div>
+                            <div class="box_normal">
+                                データベースに関してはいつの日にか解説すると思います。きっと。
                             </div>
                         </div>
                     </section>
+
+                    <!--１，シナリオ-->
+                    <section id="section2" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">１，Sample04のシナリオ</h2>
+                            <div class="Box_Normal">
+                                【主旨】<br>
+                                Spring MVC で言う、<b class="RedChar">Repository</b>の使い方の概要を解説します。
+                            </div>
+                            <div class="Box_Normal">
+                                Spring MVC（およびSpring Boot/Spring Data）のアーキテクチャにおいて、リポジトリ（Repository）は、データベースや外部ストレージなどのデータ永続化層とのやり取りを専門に行うコンポーネント（層）です。<br>
+                                アーキテクチャ全体の中では、ビジネスロジックを担うサービス層（Service）と、データベースの間に位置し、データアクセスの詳細をカプセル化する役割を持ちます。
+                            </div>
+                            <div class="box_Scenario">
+                                <pre>
+Sample04 シナリオ
+	１，ブラウザから http://localhost:8080/newmember へ GETリクエストを送信する。
+	２，Sample04Controller の @GetMapping("/newmember") アノテーションがついたメソッド sample0401() が起動する。
+	３，sample0401() は、空の MemberForm インスタンスを Model に追加し、newmember.html に遷移する。
+        MemberFormは、下記の様に定義している。
+	４，newmember.html は、Thymeleaf を用いて作成され、Model のフォームデータを画面にバインドする。
+        ただし、年齢は後で計算するので、ここでは、表示しない。
+	５，ユーザーはブラウザから必要事項を入力し、サーバーに送信する。
+	６，Sample04Controller の @PostMapping("/newmemberResult") アノテーションがついたメソッド sample0401Result() が起動する。
+        sample0401Result() は、クライアントから送られてきた値（フォームデータ）を受け取る。
+        Service の sample0401Service に <b class="BlueChar">フォームデータを引数として渡す</b>。
+	７，sample0401Service は、受け取った生年月日から年齢を計算する。
+        sample0401Service 内で<b class="BlueChar">受け取ったフォームデータ（MemberForm）の age フィールドに、計算した年齢をセット（格納）する。</b>
+        sample0401Service は、sample0401Repository に<b class="BlueChar">フォームデータを渡す。</b>
+	<b class="RedChar">８，sample0401Repository は受け取ったフォームデータをH2データベースに書き込む。
+        データベースに書き込み成功した場合は 0 を返す。失敗した場合は -1 を返す。</b>
+	9, sample0401Service は、<b class="GreenChar">リポジトリの戻り値が 0 なら「年齢がセットされたフォームデータ」を、-1 の場合は -1 を Controller に返す。</b>
+	10，sample0401Result() は、<b class="BlueChar">-1 でなければ、Model にフォームデータ（または年齢）をセットし、newMemberResult.html に遷移する。</b>
+        -1 の場合、error01.html に遷移する。
+	11，newMemberResult.html は、Model に渡されたデータを Thymeleaf で展開し表示する。
+        ここで初めて、計算した年齢を表示する。
+	12,error01.html には、「データベースへの書き込みに失敗しました。」を表示する。
+	13，処理を終了する。
+
+	MemberFormは下記の様に定義している。
+	public class MemberForm {
+		private String kanjiSei;   // 漢字姓
+		private String kanjiMei;   // 漢字名
+		private String kanaSei;    // カナ姓
+		private String kanaMei;    // カナ名
+		private String birthDate;  // 生年月日(yyyy-mm-dd 形式)
+		private String age;	 //年齢
+		private String postalCode; // 郵便番号
+		private String address;    // 住所
+	}
+                                </pre>
+
+                            </div>
+                        </div>
+                    </section>
+
+
                 </main>
             </div>
         </div>

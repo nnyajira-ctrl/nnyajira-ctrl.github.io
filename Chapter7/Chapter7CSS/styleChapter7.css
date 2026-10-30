@@ -7,13 +7,21 @@
 /*-----------------------------------------------------------------------------
  *  HP全体の設定
  *----------------------------------------------------------------------------*/
-body {
+html {
     color: Black;
     font-family: 'Meiryo', 'メイリオ', sans-serif;
     font-size: 12pt;
     background-color: snow;
 }
 
+/*
+ body {
+    color: Black;
+    font-family: 'Meiryo', 'メイリオ', sans-serif;
+    font-size: 12pt;
+    background-color: snow;
+}
+*/
 /* ヘッダーのデザイン設定 */
 .custom-header {
     height: 60px;
@@ -47,6 +55,7 @@ body {
 .content-section h2 {
     margin-bottom: 15px;
     color: #2c3e50;
+    font-weight: bold;
     border-bottom: 2px solid #ecf0f1;
     padding-bottom: 5px;
 }
@@ -61,5 +70,15 @@ body {
  *============================================================================*/
 .BlueChar {
     color: blue ;
+    font-weight: bold;
+}
+
+.RedChar {
+    color: Red ;
+    font-weight: bold;
+}
+
+.GreenChar {
+    color: green ;
     font-weight: bold;
 }
