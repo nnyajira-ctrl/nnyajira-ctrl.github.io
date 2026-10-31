@@ -34,7 +34,10 @@
                         <li class="nav-item mb-2"><a href="#section1" class="nav-link text-black p-0"><b class="RedChar">０，ニャジラの提案</b></a></li>
                         <li class="nav-item mb-2"><a href="#section2" class="nav-link text-black p-0">１，Sample04のシナリオ</a></li>
                         <li class="nav-item mb-2"><a href="#section3" class="nav-link text-black p-0">２，シーケンス図</a></li>
-                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">３，プロジェクトの前提設定（Spring Initializr）</a></li>
+                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">３，プロジェクトの前提設定</a></li>
+                        <li class="nav-item mb-2"><a href="#section5" class="nav-link text-black p-0">４，設定ファイル</a></li>
+                        <li class="nav-item mb-2"><a href="#section6" class="nav-link text-black p-0">５，テーブル定義</a></li>
+                        <li class="nav-item mb-2"><a href="#section7" class="nav-link text-black p-0">６，ソースコードの実装</a></li>
                     </ul>
                     <div>
                         <b><a href="../index.html">トップページへ</a></b>
@@ -151,8 +154,8 @@ Sample04 シナリオ
                                         </tr>
                                         <tr>
                                             <th scope="row">２</th>
-                                            <td>Project</td>
-                                            <td>Maven</td>
+                                            <td>プロジェクト名</td>
+                                            <td>Sample04</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">３</th>
@@ -185,6 +188,44 @@ Sample04 シナリオ
                         </div>
                     </section>
 
+                    <!-- Section ６-->
+                    <section id="section6" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">５，テーブル定義 (src/main/resources/schema.sql)</h2>
+                            <div class="box_normal">H2データベースの接続設定を行います。</div>
+                            <div class="box_normal">
+                                アプリケーション起動時に自動でH2データベースへテーブルを作成するSQLファイルです。
+                            </div>
+                            <div class="program-box">
+                                <pre><b>
+CREATE TABLE IF NOT EXISTS member (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kanji_sei VARCHAR(50),
+    kanji_mei VARCHAR(50),
+    kana_sei VARCHAR(50),
+    kana_mei VARCHAR(50),
+    birth_date VARCHAR(20),
+    age VARCHAR(10),
+    postal_code VARCHAR(20),
+    address VARCHAR(255)
+);
+                                </b></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section ７-->
+                    <section id="section7" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">６，ソースコードの実装</h2>
+                            <div class="box_normal">
+                                ここから実際のプログラム例を解説していきます。<br>
+                                まずは、
+                            </div>
+                            <div class="program-box">
+                            </div>
+                        </div>
+                    </section>
 
 
                 </main>
