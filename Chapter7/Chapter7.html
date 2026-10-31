@@ -32,13 +32,14 @@
                     <hr>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a href="#section1" class="nav-link text-black p-0"><b class="RedChar">０，ニャジラの提案</b></a></li>
-                        <li class="nav-item mb-2"><a href="#section2" class="nav-link text-black p-0">１，Sample04のシナリオ</a></li>
-                        <li class="nav-item mb-2"><a href="#section3" class="nav-link text-black p-0">２，シーケンス図</a></li>
-                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">３，プロジェクトの前提設定</a></li>
-                        <li class="nav-item mb-2"><a href="#section5" class="nav-link text-black p-0">４，設定ファイル</a></li>
-                        <li class="nav-item mb-2"><a href="#section6" class="nav-link text-black p-0">５，テーブル定義</a></li>
-                        <li class="nav-item mb-2"><a href="#section7" class="nav-link text-black p-0">６，ソースコードの実装</a></li>
-                        <li class="nav-item mb-2"><a href="#section8" class="nav-link text-black p-0">６-１，フォームクラス</a></li>
+                        <li class="nav-item mb-2"><a href="#section2" class="nav-link text-black p-0">１，Spring Framework　データベース操作法</a></li>
+                        <li class="nav-item mb-2"><a href="#section3" class="nav-link text-black p-0">２，Sample04のシナリオ</a></li>
+                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">３，シーケンス図</a></li>
+                        <li class="nav-item mb-2"><a href="#section5" class="nav-link text-black p-0">４，プロジェクトの前提設定</a></li>
+                        <li class="nav-item mb-2"><a href="#section6" class="nav-link text-black p-0">５，設定ファイル</a></li>
+                        <li class="nav-item mb-2"><a href="#section7" class="nav-link text-black p-0">６，テーブル定義</a></li>
+                        <li class="nav-item mb-2"><a href="#section8" class="nav-link text-black p-0">７，ソースコードの実装</a></li>
+                        <li class="nav-item mb-2"><a href="#section9" class="nav-link text-black p-0">７-１，フォームクラス</a></li>
                     </ul>
                     <div>
                         <b><a href="../index.html">トップページへ</a></b>
@@ -61,10 +62,68 @@
                         </div>
                     </section>
 
-                    <!--１，シナリオ-->
+                    <!-- １，Spring Framework　データベース操作法 -->
                     <section id="section2" class="content-section">
                         <div class="Box_Container">
-                            <h2 class="content-section h2">１，Sample04のシナリオ</h2>
+                            <h2 class="content-section h2">１，Spring Framework　データベース操作法</h2>
+                            <div class="box_normal">
+                                Spring Framework（Spring Boot）においてリレーショナルデータベース（RDBMS）を操作する代表的な2大アプローチとして、<b class="RedChar">「Spring JDBC」</b> と <b class="RedChar">「Spring Data JPA」</b> が広く知られています。
+                            </div>
+                            <div>
+                                <table>
+                                    <caption>
+                                        <b>(table-1)概要と主な違い</b>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">項目</th>
+                                            <th scope="col">Spring JDBC</th>
+                                            <th scope="col">Spring Data JPA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">抽象化レベル</th>
+                                            <td>低い（SQLに近い）</td>
+                                            <td>高い（オブジェクト指向的）</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">SQLの記述</th>
+                                            <td>開発者が自分でSQLを書く</td>
+                                            <td>フレームワークが自動生成する<br>（JPA/Hibernate）</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">マッピング</th>
+                                            <td>手動（ResultSetからJavaオブジェクトへ）</td>
+                                            <td>自動（アノテーションベースでDBのテーブルとエンティティを紐付け）</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">得意なこと</th>
+                                            <td>複雑なSQL、大量データの高速処理、チューニング</td>
+                                            <td>
+                                                標準的なCRUD操作、オブジェクト同士の関連（1対多など）を活かした開発
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">学習コスト</th>
+                                            <td>SQLの知識があれば低い（JDBCの煩雑さを減らしたもの）</td>
+                                            <td>
+                                                JPA/Hibernateの仕組みや独自のクエリ命名規則の理解が必要
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                最初に<b class="RedChar">「Spring JDBC」</b>、次に <b class="RedChar">「Spring Data JPA」</b>の解説をしていきます。<br>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--１，シナリオ-->
+                    <section id="section3" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">２，Sample04のシナリオ</h2>
                             <div class="Box_Normal">
                                 【主旨】<br>
                                 Spring MVC で言う、<b class="RedChar">Repository</b>の使い方の概要を解説します。
@@ -117,9 +176,9 @@ Sample04 シナリオ
                     </section>
 
                     <!-- Section 3-->
-                    <section id="section3" class="content-section">
+                    <section id="section4" class="content-section">
                         <div class="Box_Container">
-                            <h2 class="content-section h2">２，シーケンス図</h2>
+                            <h2 class="content-section h2">３，シーケンス図</h2>
                             <div class="box_normal_IMG">
                                 <img src="./Chap7IMG/Sample04シーケンス図.png" alt="Sample04のシーケンス図">
                             </div>
@@ -132,9 +191,9 @@ Sample04 シナリオ
                     </section>
 
                     <!-- Section ４-->
-                    <section id="section4" class="content-section">
+                    <section id="section5" class="content-section">
                         <div class="Box_Container">
-                            <h2 class="content-section h2">３，プロジェクトの前提設定（Spring Initializr）</h2>
+                            <h2 class="content-section h2">４，プロジェクトの前提設定（Spring Initializr）</h2>
                             <div class="box_normal">
                                 <table>
                                     <caption>
@@ -179,11 +238,11 @@ Sample04 シナリオ
                     </section>
 
                     <!-- Section ５-->
-                    <section id="section5" class="content-section">
+                    <section id="section6" class="content-section">
                         <div class="Box_Container">
-                            <h2 class="content-section h2">４，設定ファイル (src/main/resources/application.properties)</h2>
+                            <h2 class="content-section h2">５，設定ファイル (src/main/resources/application.properties)</h2>
                             <div class="box_normal">
-                                H2データベースの接続設定を行います。<br>
+                                <b class="RedChar">Spring JDBC</b>の設定です。<br>
                                 <b class="BlueChar">src/main/resources/</b>フォルダの中に<b class="RedChar">application.properties</b>ファイルに書き込んでください。
                             </div>
                             <div class="program-box">
@@ -202,9 +261,9 @@ Sample04 シナリオ
                     </section>
 
                     <!-- Section ６-->
-                    <section id="section6" class="content-section">
+                    <section id="section7" class="content-section">
                         <div class="Box_Container">
-                            <h2 class="content-section h2">５，テーブル定義 (src/main/resources/schema.sql)</h2>
+                            <h2 class="content-section h2">６，テーブル定義 (src/main/resources/schema.sql)</h2>
                             <div class="box_normal">H2データベースの接続設定を行います。</div>
                             <div class="box_normal">
                                 アプリケーション起動時に自動でH2データベースへテーブルを作成するSQLファイルです。<br>
@@ -229,9 +288,9 @@ CREATE TABLE IF NOT EXISTS member (
                     </section>
 
                     <!-- Section ７-->
-                    <section id="section7" class="content-section">
+                    <section id="section8" class="content-section">
                         <div class="Box_Container">
-                            <h2 class="content-section h2">６，ソースコードの実装</h2>
+                            <h2 class="content-section h2">７，ソースコードの実装</h2>
                             <div class="box_normal">
                                 ここから実際のプログラム例を解説していきます。<br>
                                 まずは、
@@ -239,9 +298,9 @@ CREATE TABLE IF NOT EXISTS member (
                         </div>
                     </section>
 
-                    <section id="section8" class="content-section">
+                    <section id="section9" class="content-section">
                         <div class="Box_Container">
-                            <h2 class="content-section h2">６-１，フォームクラス (com.example.demo.form.MemberForm.java)</h2>
+                            <h2 class="content-section h2">７-１，フォームクラス (com.example.demo.form.MemberForm.java)</h2>
                             <div class="box_normal">
                                 <b class="BlueChar">Lombok</b>の<b class="RedChar">@Data</b> アノテーションを使用しています。<br>
                                 <b class="BlueChar">Lombok</b>は、<b class="GreenChar">setter、getter</b>をわざわざ書かないのでプログラムがすっきりします。
