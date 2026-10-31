@@ -136,6 +136,18 @@ h2{
     border-radius: 8px;
 }
 
+/* midasi2BlueBox */
+.midasi2BlueBox{
+    font-size: 20px;
+    border: solid 3px blue; /*線*/
+    border-radius: 8px;
+    background-color: lightcyan;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+    margin-top: 20px;    /* 上の空白 */
+}
+
 /*midasi2-1*/
 .midasimidasi2-1{
     font-size: 20px;

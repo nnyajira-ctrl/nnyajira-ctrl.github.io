@@ -38,6 +38,7 @@
                         <li class="nav-item mb-2"><a href="#section5" class="nav-link text-black p-0">４，設定ファイル</a></li>
                         <li class="nav-item mb-2"><a href="#section6" class="nav-link text-black p-0">５，テーブル定義</a></li>
                         <li class="nav-item mb-2"><a href="#section7" class="nav-link text-black p-0">６，ソースコードの実装</a></li>
+                        <li class="nav-item mb-2"><a href="#section8" class="nav-link text-black p-0">６-１，フォームクラス</a></li>
                     </ul>
                     <div>
                         <b><a href="../index.html">トップページへ</a></b>
@@ -162,6 +163,15 @@ Sample04 シナリオ
                                             <td>Dependencies</td>
                                             <td>Spring Web、Thymeleaf、H2 Database、Lombok、<br>Spring Data JDBC（または Spring Data JPA / JDBC API）</td>
                                         </tr>
+                                        <tr>
+                                            <th scope="row">4</th>
+                                            <td>最初のパッケージ構成</td>
+                                            <td>
+                                                <div class="box_normal_IMG">
+                                                    <img src="./Chap7IMG/Eclipse04_最初のフォルダ構成.png" alt="最初のフォルダ構成">
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -172,7 +182,10 @@ Sample04 シナリオ
                     <section id="section5" class="content-section">
                         <div class="Box_Container">
                             <h2 class="content-section h2">４，設定ファイル (src/main/resources/application.properties)</h2>
-                            <div class="box_normal">H2データベースの接続設定を行います。</div>
+                            <div class="box_normal">
+                                H2データベースの接続設定を行います。<br>
+                                <b class="BlueChar">src/main/resources/</b>フォルダの中に<b class="RedChar">application.properties</b>ファイルに書き込んでください。
+                            </div>
                             <div class="program-box">
                                 spring.datasource.url=jdbc:h2:mem:testdb<br>
                                 spring.datasource.driverClassName=org.h2.Driver<br>
@@ -194,7 +207,8 @@ Sample04 シナリオ
                             <h2 class="content-section h2">５，テーブル定義 (src/main/resources/schema.sql)</h2>
                             <div class="box_normal">H2データベースの接続設定を行います。</div>
                             <div class="box_normal">
-                                アプリケーション起動時に自動でH2データベースへテーブルを作成するSQLファイルです。
+                                アプリケーション起動時に自動でH2データベースへテーブルを作成するSQLファイルです。<br>
+                                <b class="BlueChar">src/main/resources/</b>フォルダの中に<b class="RedChar">schema.sql</b>ファイルを作ってその中に書き込んでください。
                             </div>
                             <div class="program-box">
                                 <pre><b>
@@ -222,7 +236,38 @@ CREATE TABLE IF NOT EXISTS member (
                                 ここから実際のプログラム例を解説していきます。<br>
                                 まずは、
                             </div>
-                            <div class="program-box">
+                        </div>
+                    </section>
+
+                    <section id="section8" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">６-１，フォームクラス (com.example.demo.form.MemberForm.java)</h2>
+                            <div class="box_normal">
+                                <b class="BlueChar">Lombok</b>の<b class="RedChar">@Data</b> アノテーションを使用しています。<br>
+                                <b class="BlueChar">Lombok</b>は、<b class="GreenChar">setter、getter</b>をわざわざ書かないのでプログラムがすっきりします。
+                            </div>
+                            <div class="box_normal">
+                                <b class="BlueChar">form</b>パッケージを作って、その中にの<b class="BlueChar">MemberForm.java</b>ファイルを作って、その中に書き込みます。<br>
+                                これが、<b class="RedChar">Model</b>の元ですね。
+                            </div>
+                            <div  class="program-box">
+                                <pre>
+package com.example.demo.form;
+
+<b class="BlueChar">import lombok.Data;</b>
+
+<b class="RedChar">@Data</b>
+public class MemberForm {
+    private String kanjiSei;   // 漢字姓
+    private String kanjiMei;   // 漢字名
+    private String kanaSei;    // カナ姓
+    private String kanaMei;    // カナ名
+    private String birthDate;  // 生年月日(yyyy-mm-dd 形式)
+    private String age;        // 年齢
+    private String postalCode; // 郵便番号
+    private String address;    // 住所
+}
+                                </pre>
                             </div>
                         </div>
                     </section>
