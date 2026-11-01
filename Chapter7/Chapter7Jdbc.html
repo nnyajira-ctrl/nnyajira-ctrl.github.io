@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Repository</title>
+        <!-- Bootstrap 5 CDNの読み込み -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- 独自のカスタムCSS -->
+        <link rel="stylesheet" href="../CSS/style01.css">
+        <link rel="stylesheet" href="../CSS/explanationDesign.css">
+        <link rel="stylesheet" href="../CSS/table.css">
+        <link rel="stylesheet" href="../H2DataBase/H2CSS/boxdesign.css">
+        <link rel="stylesheet" href="./Chapter7CSS/styleChapter7.css">
+        <link rel="stylesheet" href="./Chapter7CSS/chap7Table.css">
+    </head>
+
+    <body class="d-flex flex-column vh-100 overflow-hidden">
+
+        <!-- ヘッダー (固定) -->
+        <header class="custom-header text-white px-4 d-flex align-items-center flex-shrink-0">
+            <h1><b>#7 View-Model-Controller-Service-Repository</b></h1>
+        </header>
+
+        <!-- メインコンテンツエリア (12分割) -->
+        <div class="container-fluid flex-grow-1 overflow-hidden p-0">
+            <div class="row h-100 g-0">
+                
+                <!-- 左サイドメニュー (2/12 = 約16.7%) -->
+                <nav class="col-2 custom-sidebar text-black p-3 overflow-auto h-100">
+                    <h5>サイドメニュー</h5>
+                    <hr>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#section1" class="nav-link text-black p-0">１，Spring JDBC とは？</b></a></li>
+                        <li class="nav-item mb-2"><a href="#section2" class="nav-link text-black p-0">２，Eclipse (Spring Initializr)の設定</a></li>
+                        <li class="nav-item mb-2"><a href="#section3" class="nav-link text-black p-0">２，Sample04のシナリオ</a></li>
+                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">３，シーケンス図</a></li>
+                        <li class="nav-item mb-2"><a href="#section5" class="nav-link text-black p-0">４，プロジェクトの前提設定</a></li>
+                        <li class="nav-item mb-2"><a href="#section6" class="nav-link text-black p-0">５，設定ファイル</a></li>
+                        <li class="nav-item mb-2"><a href="#section7" class="nav-link text-black p-0">６，テーブル定義</a></li>
+                        <li class="nav-item mb-2"><a href="#section8" class="nav-link text-black p-0">７，ソースコードの実装</a></li>
+                        <li class="nav-item mb-2"><a href="#section9" class="nav-link text-black p-0">７-１，フォームクラス</a></li>
+                    </ul>
+                    <div>
+                        <b><a href="../index.html">トップページへ</a></b>
+                    </div>
+                </nav>
+
+                <!-- 中央の解説エリア (10/12 = 約83.3% ※ここがスクロール) -->
+                <main class="col-10 custom-main p-4 overflow-y-auto h-100">
+                    <section id="section1" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">Spring JDBC</h2>
+                            <div class="box_normal">
+                                <h3>1. Spring JDBC とは？</h3>
+                                    <p>Spring JDBCとは、Javaの「Spring Framework」が提供してくれる、データベース操作を楽にするための便利な仕組み（ライブラリ）です。<br>
+                                    Spring JDBCを使うと、面倒な手順を自動化してくれて、より少ないコードで安全にデータベースを操作できるようになります。</p>
+                            </div>
+                            <div class="box_normal">
+                                <h3>2.「普通のJDBC」とは何なのか？</h3>
+                                    <p>「普通のJDBC（Java Database Connectivity）」は、Javaからデータベースに接続するための一番もととなる標準的な仕組みです。<br>いわば「すべての基本」です。</p>
+                                    <p>ただし、普通のJDBCは「できることの基本」がすべて揃っている反面、実際にコードを書くとなると以下のような面倒で繰り返し同じになる作業（ボイラープレートコード）がたくさん必要になります。</p>
+                            </div>
+                            <div class="box_normal">
+                                <b class="RedChar">普通のJDBC</b><b>は、車を動かすために「エンジンの仕組みからガソリンの調達まですべて自分で手動で行うマニュアル車」のようなものです。</b><br>
+                                <b class="RedChar">Spring JDBC</b><b>は、「キーを回せばすぐに快適に走り出せる、便利な機能がついたオートマ車」と言えます。</b></p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ２，Eclipse (Spring Initializr)の設定 -->
+                    <section id="section2" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">２，Eclipse (Spring Initializr)の設定</h2>
+                            <div>
+                                <table>
+                                    <caption>
+                                        <b>２，Eclipse (Spring Initializr)の設定</b>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">項番</th>
+                                            <th scope="col">設定</th>
+                                            <th scope="col">解説</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">１</th>
+                                            <td>
+                                                <div class="box_normal_IMG">
+                                                    <img src="./Chap7IMG/Eclipse01.png" alt="">
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                    プロジェクト名：<b>Sample04</b><br>
+                                                    <b>青枠は、確認してください。</b><br>特に、<b class="GreenChar">タイプ：</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">２</th>
+                                            <td>
+                                                <div class="box_normal_IMG">
+                                                    <img src="./Chap7IMG/Eclipse02.png" alt="">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <b class="BlueChar">Spring Boot DevTools：</b>開発を効率的に進めるための便利な機能を集めた開発者向けツール（モジュール）<br>
+                                                <b class="BlueChar">Spring Web (Web)：</b>Webアプリケーションやコントローラーを作成するため<br>
+                                                <b class="BlueChar">Thymeleaf (Templates)：</b>HTMLテンプレート（newmember.html など）を扱うため<br>
+                                                <b class="BlueChar">Spring JDBC (I/O)：</b>Spring JDBCを使用してデータベース操作を行うため<br>
+                                                <b class="BlueChar">H2 Database (I/O)：</b>インメモリデータベースであるH2を利用するため<br>
+                                                <b class="BlueChar">Lombok (Developer Tools)：</b>Getter/Setterなどを自動生成するため
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">３</th>
+                                            <td>
+                                                <div class="box_normal_IMG">
+                                                    <img src="./Chap7IMG/Eclipse04_最初のフォルダ構成.png" alt="">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                最初のパッケージ構成です。開発上、いくつかパッケージを作成して頂きます。
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <b class="RedChar">「Spring JDBC」</b>使用時の設定例です。<br>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--１，シナリオ-->
+                    <section id="section3" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">２，Sample04のシナリオ</h2>
+                            <div class="Box_Normal">
+                                【主旨】<br>
+                                Spring MVC で言う、<b class="RedChar">Repository</b>の使い方の概要を解説します。
+                            </div>
+                            <div class="Box_Normal">
+                                Spring MVC（およびSpring Boot/Spring Data）のアーキテクチャにおいて、リポジトリ（Repository）は、データベースや外部ストレージなどのデータ永続化層とのやり取りを専門に行うコンポーネント（層）です。<br>
+                                アーキテクチャ全体の中では、ビジネスロジックを担うサービス層（Service）と、データベースの間に位置し、データアクセスの詳細をカプセル化する役割を持ちます。
+                            </div>
+                            <div class="box_Scenario">
+                                <pre>
+Sample04 シナリオ
+	１，ブラウザから http://localhost:8080/newmember へ GETリクエストを送信する。
+	２，Sample04Controller の @GetMapping("/newmember") アノテーションがついたメソッド sample0401() が起動する。
+	３，sample0401() は、空の MemberForm インスタンスを Model に追加し、newmember.html に遷移する。
+        MemberFormは、下記の様に定義している。
+	４，newmember.html は、Thymeleaf を用いて作成され、Model のフォームデータを画面にバインドする。
+        ただし、年齢は後で計算するので、ここでは、表示しない。
+	５，ユーザーはブラウザから必要事項を入力し、サーバーに送信する。
+	６，Sample04Controller の @PostMapping("/newmemberResult") アノテーションがついたメソッド sample0401Result() が起動する。
+        sample0401Result() は、クライアントから送られてきた値（フォームデータ）を受け取る。
+        Service の sample0401Service に <b class="BlueChar">フォームデータを引数として渡す</b>。
+	７，sample0401Service は、受け取った生年月日から年齢を計算する。
+        sample0401Service 内で<b class="BlueChar">受け取ったフォームデータ（MemberForm）の age フィールドに、計算した年齢をセット（格納）する。</b>
+        sample0401Service は、sample0401Repository に<b class="BlueChar">フォームデータを渡す。</b>
+	<b class="RedChar">８，sample0401Repository は受け取ったフォームデータをH2データベースに書き込む。
+        データベースに書き込み成功した場合は 0 を返す。失敗した場合は -1 を返す。</b>
+	9, sample0401Service は、<b class="GreenChar">リポジトリの戻り値が 0 なら「年齢がセットされたフォームデータ」を、-1 の場合は -1 を Controller に返す。</b>
+	10，sample0401Result() は、<b class="BlueChar">-1 でなければ、Model にフォームデータ（または年齢）をセットし、newMemberResult.html に遷移する。</b>
+        -1 の場合、error01.html に遷移する。
+	11，newMemberResult.html は、Model に渡されたデータを Thymeleaf で展開し表示する。
+        ここで初めて、計算した年齢を表示する。
+	12,error01.html には、「データベースへの書き込みに失敗しました。」を表示する。
+	13，処理を終了する。
+
+	MemberFormは下記の様に定義している。
+	public class MemberForm {
+		private String kanjiSei;   // 漢字姓
+		private String kanjiMei;   // 漢字名
+		private String kanaSei;    // カナ姓
+		private String kanaMei;    // カナ名
+		private String birthDate;  // 生年月日(yyyy-mm-dd 形式)
+		private String age;	 //年齢
+		private String postalCode; // 郵便番号
+		private String address;    // 住所
+	}
+                                </pre>
+
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3-->
+                    <section id="section4" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">３，シーケンス図</h2>
+                            <div class="box_normal_IMG">
+                                <img src="./Chap7IMG/Sample04シーケンス図.png" alt="Sample04のシーケンス図">
+                            </div>
+                            <div class="box_normal">
+                                だいぶごちゃごちゃしてきました。<br>
+                                何度も申し上げますが、きれいに書くのが目的ではありません。<br>
+                                どういう流れで処理をするのかをシミュレーションするのが目的なのです。
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section ４-->
+                    <section id="section5" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">４，プロジェクトの前提設定（Spring Initializr）</h2>
+                            <div class="box_normal">
+                                <table>
+                                    <caption>
+                                        プロジェクトの前提設定
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">項目</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">１</th>
+                                            <td>IDE</td>
+                                            <td>Eclipse</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">２</th>
+                                            <td>プロジェクト名</td>
+                                            <td>Sample04</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">３</th>
+                                            <td>Dependencies</td>
+                                            <td>Spring Web、Thymeleaf、H2 Database、Lombok、<br>Spring Data JDBC（または Spring Data JPA / JDBC API）</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">4</th>
+                                            <td>最初のパッケージ構成</td>
+                                            <td>
+                                                <div class="box_normal_IMG">
+                                                    <img src="./Chap7IMG/Eclipse04_最初のフォルダ構成.png" alt="最初のフォルダ構成">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section ５-->
+                    <section id="section6" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">５，設定ファイル (src/main/resources/application.properties)</h2>
+                            <div class="box_normal">
+                                <b class="RedChar">Spring JDBC</b>の設定です。<br>
+                                <b class="BlueChar">src/main/resources/</b>フォルダの中に<b class="RedChar">application.properties</b>ファイルに書き込んでください。
+                            </div>
+                            <div class="program-box">
+                                spring.datasource.url=jdbc:h2:mem:testdb<br>
+                                spring.datasource.driverClassName=org.h2.Driver<br>
+                                spring.datasource.username=sa<br>
+                                spring.datasource.password=<br>
+                                spring.h2.console.enabled=true<br>
+                                spring.h2.console.path=/h2-console<br>
+                            </div>
+                            <div class="box_normal">
+                                正確には、「インメモリ接続」と言います。<br>
+                                主にH2 Databaseなどのインメモリデータベースに対してアプリケーションを接続し、データをハードディスクや外部サーバーではなく、Javaアプリケーションのメモリ（RAM）上で管理・処理する仕組みを指します。
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section ６-->
+                    <section id="section7" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">６，テーブル定義 (src/main/resources/schema.sql)</h2>
+                            <div class="box_normal">H2データベースの接続設定を行います。</div>
+                            <div class="box_normal">
+                                アプリケーション起動時に自動でH2データベースへテーブルを作成するSQLファイルです。<br>
+                                <b class="BlueChar">src/main/resources/</b>フォルダの中に<b class="RedChar">schema.sql</b>ファイルを作ってその中に書き込んでください。
+                            </div>
+                            <div class="program-box">
+                                <pre><b>
+CREATE TABLE IF NOT EXISTS member (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kanji_sei VARCHAR(50),
+    kanji_mei VARCHAR(50),
+    kana_sei VARCHAR(50),
+    kana_mei VARCHAR(50),
+    birth_date VARCHAR(20),
+    age VARCHAR(10),
+    postal_code VARCHAR(20),
+    address VARCHAR(255)
+);
+                                </b></pre>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section ７-->
+                    <section id="section8" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">７，ソースコードの実装</h2>
+                            <div class="box_normal">
+                                ここから実際のプログラム例を解説していきます。<br>
+                                まずは、
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="section9" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">７-１，フォームクラス (com.example.demo.form.MemberForm.java)</h2>
+                            <div class="box_normal">
+                                <b class="BlueChar">Lombok</b>の<b class="RedChar">@Data</b> アノテーションを使用しています。<br>
+                                <b class="BlueChar">Lombok</b>は、<b class="GreenChar">setter、getter</b>をわざわざ書かないのでプログラムがすっきりします。
+                            </div>
+                            <div class="box_normal">
+                                <b class="BlueChar">form</b>パッケージを作って、その中にの<b class="BlueChar">MemberForm.java</b>ファイルを作って、その中に書き込みます。<br>
+                                これが、<b class="RedChar">Model</b>の元ですね。
+                            </div>
+                            <div  class="program-box">
+                                <pre>
+package com.example.demo.form;
+
+<b class="BlueChar">import lombok.Data;</b>
+
+<b class="RedChar">@Data</b>
+public class MemberForm {
+    private String kanjiSei;   // 漢字姓
+    private String kanjiMei;   // 漢字名
+    private String kanaSei;    // カナ姓
+    private String kanaMei;    // カナ名
+    private String birthDate;  // 生年月日(yyyy-mm-dd 形式)
+    private String age;        // 年齢
+    private String postalCode; // 郵便番号
+    private String address;    // 住所
+}
+                                </pre>
+                            </div>
+                        </div>
+                    </section>
+
+
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
