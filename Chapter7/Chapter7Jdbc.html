@@ -325,6 +325,36 @@ public class Sample04Repository {
                             </div><br>
                             <div class="midasi3">プログラムの解説</div>
                             <div class="RedChar">１，@Repository</div>
+                            <div class="Box_Normal">
+                                Spring Boot（Spring Framework）における <b class="RedChar">@Repository</b> アノテーションは、一言でいうと<b class="RedChar">「データベースとやり取りするクラス（DAO：Data Access Object）であることをSpringに教えるための目印」</b>です。
+                            </div>
+                            <div class="Box_Normal">
+                                <b>@Repository が裏側でやってくれる2つの大きな仕事</b>
+                                <div class="Box_Normal">
+                                    ただの目印だけでなく、Spring Bootは @Repository がついたクラスに対して主に以下の2つの重要な自動処理を行ってくれます。
+                                </div>
+                                <div class="Box_Normal">
+                                    <b>① Springの管理下（Bean）に入れる</b><br>
+                                    Spring Bootでは、プログラム全体で使うオブジェクト（Bean）をSpringコンテナという場所で一元管理します。<br>
+                                    @Repository をクラスにつけておくと、Spring起動時に自動的にそのクラスのインスタンスを生成し、管理対象にしてくれます。<br>
+                                    これにより、他のクラス（サービスクラスなど）で new キーワードを使わずに、DI（依存性の注入）を使って簡単にそのリポジトリ機能を利用できるようになります。
+                                </div>
+                                <div class="Box_Normal">
+                                    <b>② 例外の翻訳（Exception Translation）</b><br>
+                                    これが @Repository の最も高度で重要な機能です。<br>
+                                    データベース操作を行っていると、使っているデータベース（MySQL、PostgreSQL、Oracleなど）やライブラリによって異なるエラー（例外）が発生します。<br>
+                                    @Repository をつけておくと、Springがそれぞれのデータベース固有のエラーを検出し、Spring共通のエラー（DataAccessException）に自動で変換（翻訳）してくれます。<br>
+                                    これにより、サービス層などの上流のコードが「どのデータベースを使っているか」に依存しにくくなり、エラーハンドリングがシンプルになります。                                </div>
+                            </div>
+
+                            <div class="Box_Normal">
+                                <div class="RedChar">２，private JdbcTemplate jdbcTemplate;</div>
+                                <div class="Box_Normal">
+                                    Spring Bootでよく見かける private JdbcTemplate jdbcTemplate; は、Javaからリレーショナルデータベース（MySQLやPostgreSQLなど）へ簡単にSQLを実行するための仕組み（オブジェクト）を定義しているコードです。<br>
+                                    <b class="RedChar">JdbcTemplate: Spring Frameworkが提供するクラスの名前です。</b><br>
+                                    <b class="BlueChar">データベース操作の面倒な定型処理（接続の確立、例外処理、後片付けなど）をすべて隠蔽してくれます。</b>
+                                </div>
+                            </div>
                         </div>
                     </section>
 
