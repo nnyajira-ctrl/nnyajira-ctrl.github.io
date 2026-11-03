@@ -333,6 +333,9 @@ public class Sample04Repository {
                                 <div class="Box_Normal">
                                     ただの目印だけでなく、Spring Bootは @Repository がついたクラスに対して主に以下の2つの重要な自動処理を行ってくれます。
                                 </div>
+                                <div class="box_normal_IMG">
+                                    <img src="../IMG/Autowiredの仕組み.jpeg" alt="Autowiredの仕組み">
+                                </div>
                                 <div class="Box_Normal">
                                     <b>① Springの管理下（Bean）に入れる</b><br>
                                     Spring Bootでは、プログラム全体で使うオブジェクト（Bean）をSpringコンテナという場所で一元管理します。<br>
@@ -354,7 +357,32 @@ public class Sample04Repository {
                                     <b class="RedChar">JdbcTemplate: Spring Frameworkが提供するクラスの名前です。</b><br>
                                     <b class="BlueChar">データベース操作の面倒な定型処理（接続の確立、例外処理、後片付けなど）をすべて隠蔽してくれます。</b>
                                 </div>
+                                <div>
+                                    <b class="GreenChar">jdbcTemplate</b>を詳しく知りたい方は、<br>
+                                    <a href="https://spring.pleiades.io/spring-framework/docs/current/javadoc-api/org/springframework/jdbc/core/JdbcTemplate.html" target="_blank" rel="noopener noreferrer">クラス JdbcTemplate JavaDoc</a> をご覧ください。<br>
+                                </div>
                             </div>
+
+                            <div class="Box_Normal">
+                                <div class="RedChar">３，SQL文</div>
+                                <div class="Box_Normal">
+                                    <b class="GreenChar">String sql = "INSERT INTO members (kanji_sei, kanji_mei, kana_sei, kana_mei, birth_date, age, postal_code, address)<br>
+                                                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";</b><br>
+                                </div>
+                                <div>
+                                    SQLに慣れている方は、「？」と思われると思います。<br>
+                                    <b class="BlueChar">VALUES (?, ?, ?, ?, ?, ?, ?, ?)"</b>は「何のこっちゃ？」と思われるかもしれませんが、これは<b class="RedChar">「プレースホルダー」</b>と呼ばれるもので、<b class="BlueChar">実際の値は後で安全に埋め込まれる仕組みです。</b><br>
+                                    これにより、SQLインジェクション攻撃などのセキュリティリスクを防ぐことができます。<br>
+                                    つまり、ユーザーが入力したデータを直接SQL文に埋め込むのではなく、プレースホルダーを使って安全に値を渡すことで、データベース操作の安全性を高めることができます。
+                                </div>
+                            </div>
+
+                            <div class="Box_Normal">
+                                <div class="RedChar">４，jdbcTemplate.update</div>
+                                <div class="Box_Normal">
+                                </div>
+                            </div>
+
                         </div>
                     </section>
 
