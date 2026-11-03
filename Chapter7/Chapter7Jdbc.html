@@ -37,6 +37,7 @@
                         <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">４，データベース<br>初期化スクリプト</a></li>
                         <li class="nav-item mb-2"><a href="#section5" class="nav-link text-black p-0">５，フォームクラス</a></li>
                         <li class="nav-item mb-2"><a href="#section6" class="nav-link text-black p-0">６，リポジトリクラス</a></li>
+                        <li class="nav-item mb-2"><a href="#section7" class="nav-link text-black p-0">７，サービスクラス</a></li>
                     </ul>
                     <div>
                         <b><a href="../index.html">トップページへ</a></b>
@@ -313,7 +314,7 @@ public class Sample04Repository {
                     form.getPostalCode(),
                     form.getAddress());</b>
             
-            // 1件以上登録できたら成功(0)、それ以外は失敗(-1)
+            <b class="GreenChar">// 1件以上登録できたら成功(0)、それ以外は失敗(-1)</b>
             <b class="BlueChar">return (rows > 0) ? 0 : -1;</b>
         } catch (Exception e) {
             <b class="BlueChar">e.printStackTrace();</b>
@@ -380,7 +381,114 @@ public class Sample04Repository {
                             <div class="Box_Normal">
                                 <div class="RedChar">４，jdbcTemplate.update</div>
                                 <div class="Box_Normal">
+                                    データベースのデータを変更する SQL（INSERT、UPDATE、DELETE）を実行するためのSpring Frameworkのメソッドです。<br>
+                                    <ol>
+                                        <li><b class="RedChar">メソッドの戻り値として、そのSQLの実行によって影響を受けた行数（int型）が返されます。</b></li>
+                                        <li><b class="BlueChar">例：1件更新されれば 1、対象がなく更新されなければ 0 が返るため、「正しく処理が行われたか」の確認に利用できます。</b></li>
+                                    </ol>
                                 </div>
+                            </div>
+
+                            <div class="Box_Normal">
+                                <div class="RedChar">５，return (rows > 0) ? 0 : -1;</div>
+                                <div class="Box_Normal">
+                                    <b class="BlueChar">(rows > 0) ? 0 : -1</b>は何をやっているのか？<br>
+                                    これは三項演算子（条件演算子）と呼ばれるものです。<br>
+                                    もし rows（行数など）が0より大きければ 0 を返し、そうでなければ（0以下なら） -1 を返す」という処理を行っています。
+                                </div>
+                            </div>
+
+                            <div class="Box_Normal">
+                                <div class="RedChar">６，e.printStackTrace();</div>
+                                <div class="Box_Normal">
+                                    <b class="BlueChar">e.printStackTrace();</b>は何をやっているのか？<br>
+                                    これは例外処理のためのメソッドで、例外が発生した際にその詳細情報をコンソールに出力します。<br>
+                                    これにより、デバッグや問題の特定が容易になります。
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--７，サービスクラス (com.example.demo.service.Sample04Service)-->
+                    <section id="section7" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">７，サービスクラス (com.example.demo.service.Sample04Service)</h2>
+                            <div class="Box_Normal">
+                                <b>src/main/java/com/example/demo/service/Sample04Service.java</b><br>
+                                メンバー情報のビジネスロジックを処理するサービスクラスです。<br>
+                                このクラスを通じて、アプリケーションのロジックが実装されます。<br>
+                                <b>生年月日 (yyyy-MM-dd) から現在の年齢を計算し、MemberForm の age にセットした上でリポジトリを呼び出します。</b>
+                            </div>
+                            <div class="program-box">
+                                <pre>
+package com.example.demo.service;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.form.MemberForm;
+import com.example.demo.repository.Sample04Repository;
+
+<b class="GreenChar">@Service</b>
+<b class="BlueChar">public class Sample04Service {</b>
+
+    <b class="GreenChar">@Autowired</b>
+    <b class="BlueChar">private Sample04Repository sample04Repository;</b>
+
+    <b class="BlueChar">public Object sample0401Service(MemberForm form) {</b>
+        // 7. 生年月日から年齢を計算する
+        try {
+            <b>//文字列を日付オブジェクトに読み込んだりするための「フォーマッタ（規則の定義）」を作成しているコード</b>
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            <b>//フォームから送られてきた日付の文字列を、Javaで日付として扱える LocalDate オブジェクトに変換（パース）しているコード</b>
+            LocalDate birthDate = LocalDate.parse(form.getBirthDate(), formatter);
+
+            <b>//現在の年月日（今日の日付）を取得し、LocalDate オブジェクトとして変数に保存しているコード</b>
+            LocalDate currentDate = LocalDate.now();
+            
+            <b>//生年月日（birthDate）と今日の日付（currentDate）の差を計算し、現在の「年齢（満年齢）」を算出しているコード</b>
+            <b>int calculatedAge = Period.between(birthDate, currentDate).getYears();</b>
+
+            <b>// 年齢をセット
+            //先ほど計算した年齢（数値）を文字列に変換し、画面やデータを管理するフォームオブジェクトにセット（格納）しているコード</b>
+            <b>form.setAge(String.valueOf(calculatedAge));</b>
+            
+        } catch (Exception e) {
+            // 日付パースエラー等の場合
+            return -1;
+        }
+
+        // リポジトリにフォームデータを渡し、書き込み結果を受け取る (8)
+        <b>int result = sample04Repository.insertMember(form);</b>
+
+        // 9. 戻り値が 0 ならフォームデータを、-1 なら -1 を返す
+        if (result == 0) {
+            <b>return form;</b>
+        } else {
+            return -1;
+        }
+    }
+}
+                                </pre>
+                            </div>
+                            <div class="Box_Normal">
+                                <div class="RedChar">１，@Service</div>
+                                <div class="Box_Normal">
+                                    <b class="BlueChar">@Service</b>は、Spring Frameworkのアノテーションで、このクラスがサービス層のコンポーネントであることを示します。これにより、Springコンテナがこのクラスを管理し、DI（依存性注入）を行うことができます。Service層は、ビジネスロジックを実装する場所であり、コントローラーとリポジトリの間の橋渡し役を果たします。
+                                </div>
+                                <div class="RedChar">２，@Autowired</div>
+                                <div class="Box_Normal">
+                                    <b class="BlueChar">@Autowired</b>は、Spring Frameworkのアノテーションで、フィールドやコンストラクタ、Setterメソッドに付与され、依存関係を自動的に注入するためのものです。これにより、手動でのオブジェクト生成や設定が不要になります。
+                                </div>
+                                <div class="box_normal_IMG">
+                                    <img src="../IMG/Autowiredの仕組み.jpeg" alt="Autowiredの仕組み">
+                                </div>
+
                             </div>
 
                         </div>
