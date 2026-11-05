@@ -683,12 +683,22 @@ public class Sample04Controller {
                     </section>
 
                     <!--１０，ニャジラの昔話-->
-                    <section id="section1" class="content-section">
+                    <section id="section10" class="content-section">
                         <div class="Box_Container">
                             <h2 class="content-section h2">１０，ニャジラの昔話</h2>
                             <div class="flowNormal-Graybox">
-                                DB（データベースの事。以降、データベースはDBと略します）と言いますが、よく使っているデータベースはリレーション・データベース（RDB）です。<br>
-                                
+                                簡単にレコードを　INSERTしたり、UPDATEしたり、DELETEしたりしますがね、DBは、たくさんの人が一気にアクセスしたりします。<br>
+                                するとですね、既にレコードが存在しているのに、別の人が同じレコードをINSERTしようとしたり、<br>
+                                既にUPDATE済のレコードを、別の人が同じレコードをUPDATEしようとしたり、<br>
+                                既にレコードがないのに、別の人が同じレコードをDELETEしようとしたりすることがあります。<br>
+                                これを「競合」と言います。<br>
+                                既に削除済のレコードをあるものとして使うと言った事態が起こる事もあります。<br>
+                                これを、ゴーストレコードと言います。<br>
+                                競合やゴーストレコードを防ぐために、DBは、INSERT文、UPDATE文、DELETE文を実行するときに、既にレコードが存在するかどうかを確認して、存在する場合は、エラーを返すようにしています。<br>
+                                <br>
+                                昔は、これを防ぐために、SELECT文でレコードを取得して、存在するかどうかを確認してからINSERTしたり、UPDATEしたり、DELETEしたりしていました。<br>
+                                <br>
+                                RDBMSでデータを健全に守ると言うのは結構大変なんですよ。<br>
                             </div>
                         </div>
                     </section>
