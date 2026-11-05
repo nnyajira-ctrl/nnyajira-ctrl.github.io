@@ -40,6 +40,7 @@
                         <li class="nav-item mb-2"><a href="#section7" class="nav-link text-black p-0">７，サービスクラス</a></li>
                         <li class="nav-item mb-2"><a href="#section8" class="nav-link text-black p-0">８，コントローラークラス</a></li>
                         <li class="nav-item mb-2"><a href="#section9" class="nav-link text-black p-0">９，HTMLテンプレート</a></li>
+                        <li class="nav-item mb-2"><a href="#section10" class="nav-link text-black p-0">10，ニャジラの昔話</a></li>
                     </ul>
                     <div>
                         <b><a href="../index.html">トップページへ</a></b>
@@ -622,13 +623,76 @@ public class Sample04Controller {
 &lt;/html&gt;
                                     </pre>
                                 </div>
+                            </div><br>
+
+                            <div>
+                                <div class="bluebox">
+                                    ② 結果表示画面: newMemberResult.html
+                                </div>
+                                <div class="Box_Normal">
+                                    ここで初めて計算された年齢が表示されます。
+                                </div>
+                                <div class="program-box">
+                                    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;登録完了&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;登録完了画面&lt;/h2&gt;
+    &lt;p&gt;以下の内容で登録しました。&lt;/p&gt;
+    &lt;ul&gt;
+        &lt;li&gt;氏名: &lt;span th:text="${memberForm.kanjiSei}"&gt;&lt;/span&gt; &lt;span th:text="${memberForm.kanjiMei}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;フリガナ: &lt;span th:text="${memberForm.kanaSei}"&gt;&lt;/span&gt; &lt;span th:text="${memberForm.kanaMei}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;生年月日: &lt;span th:text="${memberForm.birthDate}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;年齢: &lt;span th:text="${memberForm.age}"&gt;&lt;/span&gt;歳&lt;/li&gt;
+        &lt;li&gt;郵便番号: &lt;span th:text="${memberForm.postalCode}"&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;住所: &lt;span th:text="${memberForm.address}"&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;&lt;a th:href="@{/newmember}"&gt;戻る&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                    </pre>
+                                </div>
+                            </div><br>
+
+                            <div>
+                                <div class="bluebox">
+                                    ③ エラー画面: error01.html
+                                </div>
+                                <div class="program-box">
+                                    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;エラー&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;エラーが発生しました&lt;/h2&gt;
+    &lt;p style="color: red;"&gt;データベースへの書き込みに失敗しました。&lt;/p&gt;
+    &lt;p&gt;&lt;a th:href="@{/newmember}"&gt;入力画面に戻る&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                    </pre>
+                                </div>
                             </div>
-
-
-
-
                         </div>
                     </section>
+
+                    <!--１０，ニャジラの昔話-->
+                    <section id="section1" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">１０，ニャジラの昔話</h2>
+                            <div class="flowNormal-Graybox">
+                                DB（データベースの事。以降、データベースはDBと略します）と言いますが、よく使っているデータベースはリレーション・データベース（RDB）です。<br>
+                                
+                            </div>
+                        </div>
+                    </section>
+
 
                 </main>
             </div>
