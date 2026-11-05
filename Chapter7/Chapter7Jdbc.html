@@ -39,6 +39,7 @@
                         <li class="nav-item mb-2"><a href="#section6" class="nav-link text-black p-0">６，リポジトリクラス</a></li>
                         <li class="nav-item mb-2"><a href="#section7" class="nav-link text-black p-0">７，サービスクラス</a></li>
                         <li class="nav-item mb-2"><a href="#section8" class="nav-link text-black p-0">８，コントローラークラス</a></li>
+                        <li class="nav-item mb-2"><a href="#section9" class="nav-link text-black p-0">９，HTMLテンプレート</a></li>
                     </ul>
                     <div>
                         <b><a href="../index.html">トップページへ</a></b>
@@ -477,6 +478,7 @@ import com.example.demo.repository.Sample04Repository;
 }
                                 </pre>
                             </div>
+                            <div class="midasi3">プログラムの解説</div>
                             <div class="Box_Normal">
                                 <div class="RedChar">１，@Service</div>
                                 <div class="Box_Normal">
@@ -541,16 +543,92 @@ public class Sample04Controller {
             return <b class="BlueChar">"error01";</b>
         } else {
             // 成功時はフォームデータをModelにセットし、結果画面へ遷移
-            model.addAttribute("memberForm", result);
+            <b class="GreenChar">//「コントローラー（サーバー）側で処理したデータ（オブジェクト）を、画面（HTML/Thymeleaf）へ渡すための設定」を行っている</b>
+            <b class="BlueChar">model.addAttribute("memberForm", result);</b>
             return "newMemberResult";
         }
     }
 }
                                 </pre>
                             </div>
+
+                            <div  class="Box_Normal">
+                                <div class="midasi3">プログラムの解説</div>
+                                <div class="flowNormal-yellow">
+                                    １，// Serviceの呼び出し<br>
+                                        <b class="RedChar">Object</b> result = sample04Service.sample0401Service(memberForm);<br><br>
+                                        <b>なぜ、<b class="RedChar">Object</b>でなければならないのか？</b>
+                                </div>
+                                <div  class="Box_Normal">
+                                    sample04Service.sample0401Service(memberForm) は、サービスクラスのメソッドを呼び出しています。<br>
+                                    このメソッドは、成功時には MemberForm オブジェクトを返し、失敗時には -1 を返すように設計されています。<br>
+                                    そのため、戻り値の型を Object にすることで、異なる型（MemberForm と Integer）を同じ変数 result に格納できるようにしています。<br>
+                                    これにより、サービスクラスのメソッドが返す結果に応じて適切な処理を行うことができます。
+                                </div>
+
+                                <div class="flowNormal-yellow">
+                                    ２，if (result instanceof Integer && (Integer) result == -1)<br>
+                                </div>
+                                <div  class="Box_Normal">
+                                    ここは、「Service層からの処理結果がエラー（-1）であるかどうかを安全に判定している」処理です。<br>
+                                    具体的にどのようなチェックをしているのか、2つの条件に分けて説明します。
+                                </div>
+                                <div  class="Box_Normal">
+                                    <b>1. result instanceof Integer</b><br>
+                                    意味: 変数 result の中身が、数値（整数）を表す Integer 型であるかどうかを調べています。<br>
+                                    理由: Serviceクラスの戻り値の型が <b class="BlueChar">Object（どんな型でも入る箱のような型）</b>になっているためです。成功したときはフォームデータ（オブジェクト型）、失敗したときは -1（整数型）が返ってくる設計になっているため、まずは「今入っているのは数値データかな？」と確認しています。
+                                </div>
+                                <div  class="Box_Normal">
+                                    <b>2. (Integer) result == -1</b><br>
+                                    意味: 変数 result に格納された整数値が -1 と等しいかどうかを調べています。<br>
+                                    理由: シナリオの仕様で、データベースの書き込みに失敗した場合は -1 を返す決まりになっています。そのため、値が -1 であれば「書き込み失敗」とみなします。                                </div>
+                            </div>
                         </div>
                     </section>
 
+                    <!--９，HTMLテンプレート (src/main/resources/templates/)-->
+                    <section id="section9" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">９，HTMLテンプレート (src/main/resources/templates/)</h2>
+                            <div>
+                                <div class="bluebox">
+                                    ① 入力画面: newmember.html
+                                </div>
+                                <div class="Box_Normal">
+                                    シナリオの指示通り、年齢フィールドはここでは表示していません。
+                                </div>
+                                <div class="program-box">
+                                    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;新規会員登録&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;新規会員情報入力&lt;/h2&gt;
+    &lt;form th:action="@{/newmemberResult}" th:object="${memberForm}" method="post"&gt;
+        &lt;label&gt;漢字姓: &lt;input type="text" th:field="*{kanjiSei}" /&gt;&lt;/label&gt;&lt;br&gt;
+        &lt;label&gt;漢字名: &lt;input type="text" th:field="*{kanjiMei}" /&gt;&lt;/label&gt;&lt;br&gt;
+        &lt;label&gt;カナ姓: &lt;input type="text" th:field="*{kanaSei}" /&gt;&lt;/label&gt;&lt;br&gt;
+        &lt;label&gt;カナ名: &lt;input type="text" th:field="*{kanaMei}" /&gt;&lt;/label&gt;&lt;br&gt;
+        &lt;!-- 年齢は後で計算するので表示しない --&gt;
+        &lt;label&gt;生年月日 (yyyy-mm-dd): &lt;input type="text" th:field="*{birthDate}" placeholder="2000-01-01" /&gt;&lt;/label&gt;&lt;br&gt;
+        &lt;label&gt;郵便番号: &lt;input type="text" th:field="*{postalCode}" /&gt;&lt;/label&gt;&lt;br&gt;
+        &lt;label&gt;住所: &lt;input type="text" th:field="*{address}" /&gt;&lt;/label&gt;&lt;br&gt;
+        &lt;button type="submit"&gt;登録する&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                    </pre>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </section>
 
                 </main>
             </div>

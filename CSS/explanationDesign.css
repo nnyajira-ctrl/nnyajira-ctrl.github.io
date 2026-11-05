@@ -74,10 +74,23 @@
 .flowNormal-box {
   border: 2px solid #3b82f6;      /* 枠線の太さ、種類、色 */
   background-color: aliceblue;    /* 背景色 */
-  padding: 20px;                    /* 内側の余白 */
+  padding: 10px;                    /* 内側の余白 */
   border-radius: 8px;               /* 角丸 */
   color: #1e293b;                 /* 文字色 */
   /*font-size: 14px;*/                /* フォントサイズ　10Point */
+}
+
+/*----------------------------------------
+ * 青のボックス
+ *--------------------------------------*/
+.bluebox {
+  border: 2px solid #3b82f6;      /* 枠線の太さ、種類、色 */
+  background-color: aliceblue;    /* 背景色 */
+  padding: 10px;                    /* 内側の余白 */
+  border-radius: 8px;               /* 角丸 */
+  color: #1e293b;                 /* 文字色 */
+  font-weight: bold;
+  font-size: 16pt;                  /* フォントサイズ　10Point */
 }
 
 /*----------------------------------------
@@ -86,7 +99,7 @@
 .flowNormal-greenbox {
   border: 2px solid green;      /* 枠線の太さ、種類、色 */
   background-color: honeydew;    /* 背景色 */
-  padding: 20px;                    /* 内側の余白 */
+  padding: 10px;                    /* 内側の余白 */
   border-radius: 8px;               /* 角丸 */
   color: #1e293b;                 /* 文字色 */
 }
@@ -96,8 +109,8 @@
  *--------------------------------------*/
 .flowNormal-yellow {
   border: 2px solid yellow;       /* 枠線の太さ、種類、色 */
-  background-color: Yellow;  /* 背景色 */
-  padding: 5px 5px 5px 20px;     /* 内側の余白 */
+  background-color: lightyellow;  /* 背景色 */
+  padding: 5px 5px 5px 20px;        /* 内側の余白 */
   border-radius: 8px;               /* 角丸 */
   color: Black;                   /* 文字色 */
   font-weight: bold;
