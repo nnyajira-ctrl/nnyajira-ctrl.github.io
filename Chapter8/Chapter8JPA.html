@@ -35,6 +35,11 @@
                     <hr>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a href="#section1" class="nav-link text-black p-0">１，Spring Data JPA とは？</b></a></li>
+                        <li class="nav-item mb-2"><a href="#section2" class="nav-link text-black p-0">２，Eclipse (Spring Initializr)の設定</b></a></li>
+                        <li class="nav-item mb-2"><a href="#section3" class="nav-link text-black p-0">３，H2データベース設定</a></li>
+                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">４，フォームクラス</a></li>
+                        <li class="nav-item mb-2"><a href="#section5" class="nav-link text-black p-0">５，エンティティクラス</a></li>
+
                     </ul>
                     <div>
                         <b><a href="../index.html">トップページへ</a></b>
@@ -66,14 +71,14 @@
                                     </caption>
                                     <thead>
                                         <tr>
-                                            <th scope="col">項番</th>
+                                            <th scope="col" style="white-space: nowrap; width: 1%;">項番</th>
                                             <th scope="col">設定</th>
                                             <th scope="col">解説</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row">１</th>
+                                            <th scope="row" style="text-align: center;">１</th>
                                             <td>
                                                 <div class="box_normal_IMG">
                                                     <img src="./Chap8IMG/Eclipse01.png" alt="Spring Bootプロジェクト作成時のSpring Initializrの設定画面">
@@ -86,10 +91,10 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">２</th>
+                                            <th scope="row" style="text-align: center;">２</th>
                                             <td>
                                                 <div class="box_normal_IMG">
-                                                    <img src="./Chap7IMG/Eclipse02.png" alt="Spring Bootプロジェクト作成時の依存関係の設定画面">
+                                                    <img src="./Chap8IMG/Eclipse02.png" alt="Spring Bootプロジェクト作成時の依存関係の設定画面">
                                                 </div>
                                             </td>
                                             <td class="tdLeft"><p>依存関係（Dependencies）を追加します。</p>
@@ -97,28 +102,279 @@
                                                 <b class="BlueChar">１，Spring Boot DevTools：</b>開発を効率的に進めるための便利な機能を集めた開発者向けツール（モジュール）<br>
                                                 <b class="BlueChar">２，Spring Web (Web)：</b>Webアプリケーションやコントローラーを作成するため<br>
                                                 <b class="BlueChar">３，Thymeleaf(Templates)：</b>HTMLテンプレート（newmember.html など）を扱うため<br>
-                                                <b class="BlueChar">４，Spring JDBC (I/O)：</b>Spring JDBCを使用してデータベース操作を行うため<br>
+                                                <b class="BlueChar">４，Spring Data JPA (I/O)：</b>H2データベースへのデータ保存やリポジトリ操作を簡単に行うため<br>
                                                 <b class="BlueChar">５，H2 Database (I/O)：</b>インメモリデータベースであるH2を利用するため<br>
                                                 <b class="BlueChar">６，Lombok (Developer Tools)：</b>Getter/Setterなどを自動生成するため
                                                 </p>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">３</th>
+                                            <th scope="row" style="text-align: center;">３</th>
                                             <td>
                                                 <div class="box_normal_IMG">
-                                                    <img src="./Chap7IMG/Eclipse04_最初のフォルダ構成.png" alt="Spring Bootプロジェクト作成後の最初のフォルダ構成">
+                                                    <img src="./Chap8IMG/Eclipse04_最初のフォルダ構成.png" alt="Spring Bootプロジェクト作成後の最初のフォルダ構成">
                                                 </div>
                                             </td>
                                             <td class="tdLeft">
                                                 最初のパッケージ構成です。開発上、いくつかパッケージを作成して頂きます。
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align: center;">４</th>
+                                            <td>
+                                                <div class="box_normal_IMG">
+                                                    <img src="./Chap8IMG/構成.png" alt="Sample05のパッケージ構成">
+                                                </div>
+                                            </td>
+                                            <td class="tdLeft">
+                                                最終的なパッケージ構成です。
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div>
-                                <b class="RedChar">「Spring JDBC」</b>使用時の設定例です。<br>
+                                <b class="RedChar">「Spring Data JPA」</b>使用時の設定例です。<br>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--３，H2データベース設定-->
+                    <section id="section3" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">３，H2データベース設定</h2>
+                            <div class="Box_Normal">
+                                <b>src/main/resources/application.properties</b><br>
+                                H2データベースの設定例です。上記のファイルにデータベースの設定を書き込んでください。<br>
+                                他のDB（以降、データベースをDBと表記します）も同様の設定をしますが、設定がわからない場合は優秀なAIさんに聞いて見てください。
+                            </div>
+                            <div class="program-box">
+                                spring.datasource.url=jdbc:h2:mem:testdb<br>
+                                spring.datasource.driverClassName=org.h2.Driver<br>
+                                spring.datasource.username=sa<br>
+                                spring.datasource.password=<br>
+                                spring.jpa.database-platform=org.hibernate.dialect.H2Dialect<br>
+                                spring.jpa.hibernate.ddl-auto=update<br>
+                                spring.h2.console.enabled=true<br>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--４，フォームクラス-->
+                    <section id="section4" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">４，フォームクラス (com/example/demo/form/MemberForm.java)</h2>
+                            <div class="Box_Normal">
+                                <p>Lombokの @Data を使用したフォーム定義です。</p>
+                                <p>Spring BootをはじめとするWebアプリケーション開発において、フォームクラス（Form）は、「ブラウザ（ユーザー）から送信されたデータを受け取り、画面とサーバーの間でやり取りするための専用クラス」です。</p>
+                                <p>Spring MVCの Modelになります。コントローラーから画面（HTML）へ、そのデータを「運ぶためのトレイや入れ物」。</p>
+                            </div>
+                            <div class="program-box">
+                                <pre>
+package com.example.demo.form;
+
+import lombok.Data;
+
+@Data
+public class MemberForm {
+    private String kanjiSei;   // 漢字姓
+    private String kanjiMei;   // 漢字名
+    private String kanaSei;    // カナ姓
+    private String kanaMei;    // カナ名
+    private String birthDate;  // 生年月日(yyyy-mm-dd 形式)
+    private String age;        // 年齢
+    private String postalCode; // 郵便番号
+    private String address;    // 住所
+}
+                                </pre>
+                            </div><br>
+                            <div class="box_gray">
+                                <b class="RedChar">@Data</b>：Lombokのアノテーションで、<br>
+                                このアノテーションをクラスに付けると、<br>
+                                1. フィールドのGetter/Setterメソッド<br>
+                                2. toString()メソッド<br>
+                                3. equals()メソッド<br>
+                                4. hashCode()メソッド<br>
+                                5. コンストラクタ（引数なし）<br>
+                                が自動的に生成されます。<br>
+                                これにより、コードの冗長性が減り、可読性が向上します。
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--５，フォームクラス-->
+                    <section id="section5" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">エンティティクラス (com/example/demo/entity/MemberEntity.java)</h2>
+                            <div class="Box_Normal">
+                                <p>H2データベースのテーブルとマッピングするためのEntityクラスです。</p>
+                                <p>Spring Boot（およびJPA / Hibernate）におけるエンティティクラス（Entity）は、「データベースのテーブルと、Javaのオブジェクト（インスタンス）を1対1で対応づけるためのクラス」です。</p>
+                                <p>オブジェクト指向のプログラム（Java）と、リレーショナルデータベース（H2やMySQLなど）の橋渡しをする最も重要な役割を持っています。</p>
+                            </div>
+                            <div class="midasimidasi2-2"><h3>Spring Bootでのテーブル自動生成の仕組み</h3></div>
+                            <div class="box_normal_waku">
+                                <p>Spring Boot（Spring Data JPAとHibernate）を使用している場合、設定を行うことでアプリケーションの起動時にエンティティークラス（@Entity）を読み取り、対応するデータベースのテーブルを自動で作成・更新することができます。</p>
+                            </div>
+                            <div class="program-box">
+                                <pre>
+package com.example.demo.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Entity
+@Table(name = "members")
+@Data
+public class MemberEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String kanjiSei;
+    private String kanjiMei;
+    private String kanaSei;
+    private String kanaMei;
+    private String birthDate;
+    private String age;
+    private String postalCode;
+    private String address;
+}
+                                </pre>
+                            </div><br>
+                            <div  class="Box_Normal">
+                                <div class="midasi3Yellow">主要なアノテーションの意味</div>
+                                <table>
+                                    <caption>
+                                        <b>主要なアノテーションの意味</b>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="white-space: nowrap; width: 1%;">項番</th>
+                                            <th scope="col">設定</th>
+                                            <th scope="col">解説</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" style="text-align: center;">１</th>
+                                            <td class="tdLeft">
+                                                    @Entity
+                                            </td>
+                                            <td class="tdLeft">
+                                                これがないとSpring Boot（JPA）がデータベース用クラスとして認識してくれません。
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align: center;">２</th>
+                                            <td class="tdLeft" style="white-space: nowrap; width: 1%;">
+                                                    @Table(name = "テーブル名")
+                                            </td>
+                                            <td class="tdLeft">
+                                                <p>Javaのクラス名とデータベースのテーブル名が異なる場合や、明示的に指定したい場合に記述します。</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align: center;">３</th>
+                                            <td class="tdLeft">
+                                                    @Id
+                                            </td>
+                                            <td class="tdLeft">
+                                                最初のパッケージ構成です。開発上、いくつかパッケージを作成して頂きます。
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align: center;">４</th>
+                                            <td class="tdLeft">
+                                                @GeneratedValue
+                                            </td>
+                                            <td class="tdLeft">
+                                                IDの自動採番ルールを指定します（IDENTITYはデータベース側に自動採番をお任せする設定です）。
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align: center;">５</th>
+                                            <td class="tdLeft" style="white-space: nowrap; width: 1%;">
+                                                @Column(name = "カラム名")
+                                            </td>
+                                            <td class="tdLeft">
+                                                （必要に応じて）Javaのフィールド名とDBのカラム名が異なる場合や、NOT NULL制約・長さなどを指定したい場合に付けます（一致している場合は省略可能）。
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div  class="Box_Normal">
+                                <div class="midasi3Yellow">フォームクラスとエンティティクラスの違い</div>
+                                <table>
+                                    <caption>
+                                        <b>フォームクラスとエンティティクラスの違い</b>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="white-space: nowrap; width: 1%;">項番</th>
+                                            <th scope="col">項目</th>
+                                            <th scope="col">フォームクラス (MemberForm)</th>
+                                            <th scope="col">エンティティクラス (MemberEntity)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" style="text-align: center;">１</th>
+                                            <td class="tdLeft">
+                                                    主な役割
+                                            </td>
+                                            <td class="tdLeft">
+                                                画面（HTML）とコントローラー間でのデータの受け渡し
+                                            </td>
+                                            <td class="tdLeft">
+                                                データベース（DB）のテーブルと1対1でのデータの保存・管理
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align: center;">２</th>
+                                            <td class="tdLeft" style="white-space: nowrap; width: 1%;">
+                                                    データの形式
+                                            </td>
+                                            <td class="tdLeft">
+                                                <p>全て String などで受け取ることが多い</p>
+                                            </td>
+                                            <td class="tdLeft">
+                                                <p>DBの型（数値、日付、文字列など）やリレーションを正確に反映する</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" style="text-align: center;">３</th>
+                                            <td class="tdLeft">
+                                                    ライフサイクル
+                                            </td>
+                                            <td class="tdLeft">
+                                                リクエスト単位で生成・破棄される
+                                            </td>
+                                            <td class="tdLeft">
+                                                DB永続化やトランザクションの文脈で長く扱われる
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                今回のシナリオのように、<br>
+                                <ol>
+                                    <li>フォームでブラウザから値を受け取る</li>
+                                    <li>サービスクラスで年齢などを計算する</li>
+                                    <li>フォームの値をエンティティに詰め替えて、リポジトリ経由でDBに保存する</li>
+                                </ol>
+                                という手順を踏むのが、Spring Bootの標準的な設計スタイルになります。
+                            </div>
+                            <div  class="Box_Normal">
+                                <div class="midasi3Yellow">Hibernateとは</div>
+                                <div>
+                                    Hibernateとは「Javaのプログラムとデータベースの間で、SQLの翻訳やデータの出し入れを裏でぜんぶ自動化して助けてくれる、超優秀な裏方プログラム」です。
+                                </div>
                             </div>
                         </div>
                     </section>

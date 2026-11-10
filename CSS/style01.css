@@ -163,6 +163,17 @@ h2{
     margin-top: 20px;    /* 上の空白 */
 }
 
+/*midasi2-2*/
+.midasimidasi2-2{
+    font-size: 20px;
+    border: solid 3px Red; /*線*/
+    border-radius: 8px;
+    background-color: pink;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+}
+
 /*midasi2Red*/
 .midasiRed{
     font-size: 30px;
@@ -238,6 +249,16 @@ h2{
     background-color: ivory;
     color: black;
     padding: 5px;
+}
+
+/*ノーマルボックス枠あり*/
+.box_normal_waku{
+    background-color: ivory;
+    color: black;
+    border: solid 3px royalblue; /*枠*/
+    border-radius: 8px;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;    /* 上の空白 */
 }
 
 .box_textnormal{
