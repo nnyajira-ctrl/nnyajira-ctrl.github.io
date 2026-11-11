@@ -39,6 +39,7 @@
                         <li class="nav-item mb-2"><a href="#section3" class="nav-link text-black p-0">３，H2データベース設定</a></li>
                         <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">４，フォームクラス</a></li>
                         <li class="nav-item mb-2"><a href="#section5" class="nav-link text-black p-0">５，エンティティクラス</a></li>
+                        <li class="nav-item mb-2"><a href="#section6" class="nav-link text-black p-0">６，リポジトリクラス</a></li>
 
                     </ul>
                     <div>
@@ -245,7 +246,7 @@ public class MemberEntity {
                                 </pre>
                             </div><br>
                             <div  class="Box_Normal">
-                                <div class="midasi3Yellow">主要なアノテーションの意味</div>
+                                <div class="midasi3Yellow"><h4>主要なアノテーションの意味</h4></div>
                                 <table>
                                     <caption>
                                         <b>主要なアノテーションの意味</b>
@@ -308,7 +309,7 @@ public class MemberEntity {
                             </div>
 
                             <div  class="Box_Normal">
-                                <div class="midasi3Yellow">フォームクラスとエンティティクラスの違い</div>
+                                <div class="midasi3Yellow"><h4>フォームクラスとエンティティクラスの違い</h4></div>
                                 <table>
                                     <caption>
                                         <b>フォームクラスとエンティティクラスの違い</b>
@@ -371,11 +372,89 @@ public class MemberEntity {
                                 という手順を踏むのが、Spring Bootの標準的な設計スタイルになります。
                             </div>
                             <div  class="Box_Normal">
-                                <div class="midasi3Yellow">Hibernateとは</div>
+                                <div class="midasi3Yellow"><h4>Hibernateとは</h4></div>
                                 <div>
                                     Hibernateとは「Javaのプログラムとデータベースの間で、SQLの翻訳やデータの出し入れを裏でぜんぶ自動化して助けてくれる、超優秀な裏方プログラム」です。
                                 </div>
                             </div>
+                        </div>
+                    </section>
+
+                    <!--- ６，リポジトリ --->
+                    <section id="section6" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">リポジトリ (com/example/demo/repository/Sample05Repository.java)</h2>
+                            <div class="program-box">
+                                <pre>
+package com.example.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import com.example.demo.entity.MemberEntity;
+
+<b class="RedChar">@Repository</b>
+public <b class="BlueChar">interface</b> Sample05Repository <b class="BlueChar">extends JpaRepository&lt;MemberEntity, Long&gt;</b> {
+}
+                                </pre>
+                            </div><br>
+                            <div class="class="Box_Normal"">
+                                不思議なプログラムですよね。<br>
+                                <b class="RedChar">interface</b>ですもんね。<br>
+                                <p>データベースへの保存や検索（SQLの実行）を自動で行ってくれる、専用の窓口（インターフェース）なんですよ。</p>
+                                じゃあ、分解していきましょう。
+                            </div><br>
+                            <div>
+                                <div>
+                                    <div class="midasi3Yellow">
+                                        １，@Repository
+                                    </div>
+                                    <div class="class="Box_Normal"">
+                                        このインターフェースがデータアクセス層（Spring Data JPAのコンポーネント）であることをSpring Bootに伝えるアノテーションです。<br>例外の自動変換などの機能も提供されます。
+                                    </div>
+                                </div><br>
+
+                                <div>
+                                    <div class="midasi3Yellow">
+                                        ２，public interface Sample05Repository
+                                    </div>
+                                    <div class="class="Box_Normal"">
+                                        クラスではなく<b class="RedChar">インターフェースとして定義しています。</b><br>
+                                        <b class="RedChar">Spring Data JPAでは、メソッドの「中身（実装）」を自分で書く必要がありません。</b><br>
+                                        <b class="BlueChar">インターフェースを定義するだけで、Springが自動的に実装クラスを裏側で動的に生成してくれます。</b>
+                                    </div>
+                                </div><br>
+
+                                <div class="midasi3Yellow">
+                                    ３，extends JpaRepository&lt;MemberEntity, Long&gt; は何？
+                                </div>
+                                <div class="class="Box_Normal"">
+                                    <p>
+                                        <b class="BlueChar">1. データベース操作の「命令書（メソッド）」を準備している</b>
+                                            <b class="RedChar">extends JpaRepository&lt;MemberEntity, Long&gt;</b> を書くだけで、<b class="RedChar">Spring Data JPAがあらかじめ用意してくれている以下のような基本的なデータベース操作（CRUD）のメソッドが全て自動で使えるようになります。</b>
+                                            <ol>
+                                                <li><b>save(...)：</b>データの新規登録（Insert）や更新（Update）</li>
+                                                <li><b>findById(...)：</b>IDを指定した1件検索（Select）</li>
+                                                <li><b>findAll()：</b>全件取得（Select）</li>
+                                                <li><b>deleteById(...)：</b>IDを指定した削除（Delete）</li>
+                                            </ol>
+                                            <b>中身のメソッドを自分で1行も書かなくても、これらの機能がすぐに使えるのが最大のメリットです。</b>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="class="Box_Normal"">
+                                    <p>
+                                        <b class="BlueChar">2. 「どのテーブルを」「どんな型で」扱うかを指定している</b><br>
+                                        <b class="BlueChar">JpaRepository&lt;MemberEntity, Long&gt;</b> の<b> <> の中身によって、Repositoryに対して以下の指示を出しています。</b><br>
+                                        <ol>
+                                            <li><b>MemberEntity：</b>このリポジトリは、どのエンティティ（テーブル）を操作対象にするか（今回は会員テーブル）</li>
+                                            <li><b>Long：</b>そのテーブルの主キー（ID）のデータ型は何か</li>
+                                        </ol>
+                                        これによって、Repositoryが「どのデータベースのテーブルに対してSQLを組み立てればいいか」を正確に認識できるようになります。                                    </p>
+                                </div>
+                            </div>
+
                         </div>
                     </section>
 
