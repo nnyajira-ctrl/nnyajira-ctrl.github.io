@@ -21,12 +21,15 @@
     <body class="d-flex flex-column vh-100 overflow-hidden">
 
         <!-- ヘッダー (固定) -->
+<!--
         <header class="custom-header text-white px-4 d-flex align-items-center flex-shrink-0">
-            <h1><b>#8 Spring Data JPA (Repository)を使う </b></h1>
+            <h1><b>第８章　Spring Data JPA (Repository)を使う </b></h1>
         </header>
-
+-->
         <!-- メインコンテンツエリア (12分割) -->
         <div class="container-fluid flex-grow-1 overflow-hidden p-0">
+            <div class="box_gray"><h1><b>第８章　Spring Data JPA (Repository)を使う </b></h1></div>
+
             <div class="row h-100 g-0">
                 
                 <!-- 左サイドメニュー (2/12 = 約16.7%) -->
@@ -40,6 +43,7 @@
                         <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">４，フォームクラス</a></li>
                         <li class="nav-item mb-2"><a href="#section5" class="nav-link text-black p-0">５，エンティティクラス</a></li>
                         <li class="nav-item mb-2"><a href="#section6" class="nav-link text-black p-0">６，リポジトリクラス</a></li>
+                        <li class="nav-item mb-2"><a href="#section7" class="nav-link text-black p-0">７，サービスクラス</a></li>
 
                     </ul>
                     <div>
@@ -454,7 +458,73 @@ public <b class="BlueChar">interface</b> Sample05Repository <b class="BlueChar">
                                         これによって、Repositoryが「どのデータベースのテーブルに対してSQLを組み立てればいいか」を正確に認識できるようになります。                                    </p>
                                 </div>
                             </div>
+                        </div>
+                    </section>
 
+                    <!--６，サービスクラス-->
+                    <section id="section7" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">サービスクラス (com/example/demo/service/Sample05Service.java)</h2>
+                            <div class="Box_Normal">
+                                生年月日から年齢を計算し、リポジトリを介してDBに保存、成功時はフォームデータを、失敗時は -1 を返却します。
+                            </div>
+                            <div class="program-box">
+                                <pre>
+package com.example.demo.service;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.MemberEntity;
+import com.example.demo.form.MemberForm;
+import com.example.demo.repository.Sample05Repository;
+
+<b class="RedChar">@Service</b>
+public class Sample05Service {
+
+    <b class="RedChar">@Autowired
+    private Sample05Repository sample0501Repository;</b>    <b class="GreenChar">//Sample05Repository を注入している（インジェクションしている）と言います。</b>
+                                                        <b class="GreenChar">//「依存性の注入（Dependency Injection：DI）」 と呼ばれ、
+                                                        //Spring FrameworkやSpring Bootの中核をなす非常に重要な仕組みです。</b>
+
+    public <b class="RedChar">Object</b> sample0501Service(MemberForm form) {    <b class="GreenChar">//戻り値がObject型である理由はわかりますか？</b>
+        try {
+            // 1. 生年月日から年齢を計算
+            LocalDate birth = LocalDate.parse(form.getBirthDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate now = LocalDate.now();
+                int ageInt = Period.between(birth, now).getYears();
+
+                form.setAge(String.valueOf(ageInt));    <b class="GreenChar">//年齢を計算</b>
+
+            // 2. Entityに値を詰め替え
+            MemberEntity entity = new MemberEntity();
+                entity.setKanjiSei(form.getKanjiSei());
+                entity.setKanjiMei(form.getKanjiMei());
+                entity.setKanaSei(form.getKanaSei());
+                entity.setKanaMei(form.getKanaMei());
+                entity.setBirthDate(form.getBirthDate());
+                entity.setAge(form.getAge());
+                entity.setPostalCode(form.getPostalCode());
+                entity.setAddress(form.getAddress());
+
+            <b class="RedChar">// 3. データベースに書き込み
+            sample0501Repository.save(entity);</b>
+            <b class="BlueChar">
+            // 成功時は 0 相当の処理として年齢がセットされたフォームを返す（あるいは0を表現）
+            // ここでは Controller 側で -1 かどうかを判別できるようフォームオブジェクトを返却します</b>  <b class="midasi4">これが戻り値が　Object　である理由です。</b>
+            return form;
+        } catch (Exception e) {
+            // 失敗時は -1 を返す
+            return -1;
+        }
+    }
+}
+                                </pre>
+                            </div><br>
                         </div>
                     </section>
 
