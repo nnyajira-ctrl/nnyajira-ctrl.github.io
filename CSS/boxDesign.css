@@ -1,0 +1,50 @@
+/******************************************************************************
+ *  boxDesign.css
+ *-----------------------------------------------------------------------------
+ *  Boxのデザイン集
+ ******************************************************************************/
+
+/*-----------------------------------------------------------------------------
+ * normalBoxBasic
+ *----------------------------------------------------------------------------*/
+.normalBoxBasic{
+    background-color: ivory;
+    color: black;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.normalBoxMargin{
+    background-color: ivory;
+    color: black;
+    padding: 5px;
+    border-radius: 8px;
+    margin: 20px 0px 0px 0px;
+}
+
+
+
+/*-----------------------------------------------------------------------------
+ * 写真ボックス
+ *----------------------------------------------------------------------------*/
+/*写真中央*/
+.normalIMG{
+    /* 👇ここが真ん中寄せの指定 */
+    display: flex;
+    justify-content: center; /* 左右の真ん中 */
+    align-items: center;     /* 上下の真ん中 */
+    background-color: ivory;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.normalIMGmargin{
+    /* 👇ここが真ん中寄せの指定 */
+    display: flex;
+    justify-content: center; /* 左右の真ん中 */
+    align-items: center;     /* 上下の真ん中 */
+    background-color: ivory;
+    padding: 5px;
+    border-radius: 8px;
+    margin: 20px 0px 0px 0px;
+}
