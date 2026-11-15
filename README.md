@@ -1,2 +1,2 @@
-Spring Boot解説
-Read Me
+# SpringBootTutorial
+Spring Boot初心者向け教材サイト

@@ -1,0 +1,98 @@
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/*-----------------------------------------------------------------------------
+ * H4 のデザイン
+ *----------------------------------------------------------------------------*/
+h4 {
+    font-style: italic;
+    color:maroon;
+}
+
+/* ヘッダーのデザイン */
+.site-header {
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    color: white;
+    padding: 2.5rem 0;
+}
+
+.site-header a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.site-header a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* 記事カードのデザインとホバーエフェクト */
+.chapter-card {
+    border: none;
+    border-radius: 0.75rem;
+    background-color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chapter-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08) !important;
+}
+
+/* YouTube動画の16:9レスポンシブ枠 */
+.ratio-16-9 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    background-color: #000;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.ratio-16-9 iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* サイドメニューのデザイン */
+.sidebar {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.04);
+}
+
+.sidebar h5 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.sidebar ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar ul li a {
+    color: #4b5563;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.sidebar ul li a:hover {
+    color: #2563eb;
+}
