@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Repository</title>
+        <!-- Bootstrap 5 CDNの読み込み -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- 独自のカスタムCSS -->
+        <link rel="stylesheet" href="../CSS/style01.css">
+        <link rel="stylesheet" href="../CSS/explanationDesign.css">
+        <link rel="stylesheet" href="../CSS/table.css">
+        <link rel="stylesheet" href="../H2DataBase/H2CSS/boxdesign.css">
+        <link rel="stylesheet" href="./Chapter7CSS/styleChapter7.css">
+        <link rel="stylesheet" href="./Chapter7CSS/chap7Table.css">
+    </head>
+
+    <body class="d-flex flex-column vh-100 overflow-hidden">
+
+        <!-- ヘッダー (固定) -->
+        <header class="custom-header text-white px-4 d-flex align-items-center flex-shrink-0">
+            <h1><b>#7 View-Model-Controller-Service-Repository</b></h1>
+        </header>
+
+        <!-- メインコンテンツエリア (12分割) -->
+        <div class="container-fluid flex-grow-1 overflow-hidden p-0">
+            <div class="row h-100 g-0">
+                
+                <!-- 左サイドメニュー (2/12 = 約16.7%) -->
+                <nav class="col-2 custom-sidebar text-black p-3 overflow-auto h-100">
+                    <h5>サイドメニュー</h5>
+                    <hr>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#section1" class="nav-link text-black p-0"><b class="RedChar">０，ニャジラの提案</b></a></li>
+                        <li class="nav-item mb-2"><a href="#section2" class="nav-link text-black p-0">１，Spring Framework　データベース操作法</a></li>
+                        <li class="nav-item mb-2"><a href="#section3" class="nav-link text-black p-0">２，Sample04のシナリオ</a></li>
+                        <li class="nav-item mb-2"><a href="#section4" class="nav-link text-black p-0">３，シーケンス図</a></li>
+                        <li class="nav-item mb-2"><a href="#section5" class="nav-link text-black p-0">４，データベース操作</a>
+                            <p>○Spring JDBC<br>
+                               ○Spring Data JPA</p>
+                        </li>
+                    </ul>
+                    <div>
+                        <b><a href="../index.html">トップページへ</a></b>
+                    </div>
+                </nav>
+
+                <!-- 中央の解説エリア (10/12 = 約83.3% ※ここがスクロール) -->
+                <main class="col-10 custom-main p-4 overflow-y-auto h-100">
+                    <section id="section1" class="content-section">
+                        <div class="Box_Container">
+                            <div class="midasiRed">
+                                ニャジラの提案
+                            </div>
+                            <div class="midasi3Yellow">
+                                リレーショナルデータベースを扱うなら、やっぱり、データベースの勉強はした方が良いと思います。
+                            </div>
+                            <div class="box_normal">
+                                データベースに関してはいつの日にか解説すると思います。きっと。
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- １，Spring Framework　データベース操作法 -->
+                    <section id="section2" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">１，Spring Framework　データベース操作法</h2>
+                            <div class="box_normal">
+                                Spring Framework（Spring Boot）においてリレーショナルデータベース（RDBMS）を操作する代表的な2大アプローチとして、<b class="RedChar">「Spring JDBC」</b> と <b class="RedChar">「Spring Data JPA」</b> が広く知られています。
+                            </div>
+                            <div>
+                                <table>
+                                    <caption>
+                                        <b>(table-1)概要と主な違い</b>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">項目</th>
+                                            <th scope="col">Spring JDBC</th>
+                                            <th scope="col">Spring Data JPA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">抽象化レベル</th>
+                                            <td>低い（SQLに近い）</td>
+                                            <td>高い（オブジェクト指向的）</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">SQLの記述</th>
+                                            <td>開発者が自分でSQLを書く</td>
+                                            <td>フレームワークが自動生成する<br>（JPA/Hibernate）</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">マッピング</th>
+                                            <td>手動（ResultSetからJavaオブジェクトへ）</td>
+                                            <td>自動（アノテーションベースでDBのテーブルとエンティティを紐付け）</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">得意なこと</th>
+                                            <td>複雑なSQL、大量データの高速処理、チューニング</td>
+                                            <td>
+                                                標準的なCRUD操作、オブジェクト同士の関連（1対多など）を活かした開発
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">学習コスト</th>
+                                            <td>SQLの知識があれば低い（JDBCの煩雑さを減らしたもの）</td>
+                                            <td>
+                                                JPA/Hibernateの仕組みや独自のクエリ命名規則の理解が必要
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                最初に<b class="RedChar">「Spring JDBC」</b>、次に <b class="RedChar">「Spring Data JPA」</b>の解説をしていきます。<br>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--１，シナリオ-->
+                    <section id="section3" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">２，Sample04のシナリオ</h2>
+                            <div class="Box_Normal">
+                                【主旨】<br>
+                                Spring MVC で言う、<b class="RedChar">Repository</b>の使い方の概要を解説します。
+                            </div>
+                            <div class="Box_Normal">
+                                Spring MVC（およびSpring Boot/Spring Data）のアーキテクチャにおいて、リポジトリ（Repository）は、データベースや外部ストレージなどのデータ永続化層とのやり取りを専門に行うコンポーネント（層）です。<br>
+                                アーキテクチャ全体の中では、ビジネスロジックを担うサービス層（Service）と、データベースの間に位置し、データアクセスの詳細をカプセル化する役割を持ちます。
+                            </div>
+                            <div class="box_Scenario">
+                                <pre>
+Sample04 シナリオ
+	１，ブラウザから http://localhost:8080/newmember へ GETリクエストを送信する。
+	２，Sample04Controller の @GetMapping("/newmember") アノテーションがついたメソッド sample0401() が起動する。
+	３，sample0401() は、空の MemberForm インスタンスを Model に追加し、newmember.html に遷移する。
+        MemberFormは、下記の様に定義している。
+	４，newmember.html は、Thymeleaf を用いて作成され、Model のフォームデータを画面にバインドする。
+        ただし、年齢は後で計算するので、ここでは、表示しない。
+	５，ユーザーはブラウザから必要事項を入力し、サーバーに送信する。
+	６，Sample04Controller の @PostMapping("/newmemberResult") アノテーションがついたメソッド sample0401Result() が起動する。
+        sample0401Result() は、クライアントから送られてきた値（フォームデータ）を受け取る。
+        Service の sample0401Service に <b class="BlueChar">フォームデータを引数として渡す</b>。
+	７，sample0401Service は、受け取った生年月日から年齢を計算する。
+        sample0401Service 内で<b class="BlueChar">受け取ったフォームデータ（MemberForm）の age フィールドに、計算した年齢をセット（格納）する。</b>
+        sample0401Service は、sample0401Repository に<b class="BlueChar">フォームデータを渡す。</b>
+	<b class="RedChar">８，sample0401Repository は受け取ったフォームデータをH2データベースに書き込む。
+        データベースに書き込み成功した場合は 0 を返す。失敗した場合は -1 を返す。</b>
+	9, sample0401Service は、<b class="GreenChar">リポジトリの戻り値が 0 なら「年齢がセットされたフォームデータ」を、-1 の場合は -1 を Controller に返す。</b>
+	10，sample0401Result() は、<b class="BlueChar">-1 でなければ、Model にフォームデータ（または年齢）をセットし、newMemberResult.html に遷移する。</b>
+        -1 の場合、error01.html に遷移する。
+	11，newMemberResult.html は、Model に渡されたデータを Thymeleaf で展開し表示する。
+        ここで初めて、計算した年齢を表示する。
+	12,error01.html には、「データベースへの書き込みに失敗しました。」を表示する。
+	13，処理を終了する。
+
+	MemberFormは下記の様に定義している。
+	public class MemberForm {
+		private String kanjiSei;   // 漢字姓
+		private String kanjiMei;   // 漢字名
+		private String kanaSei;    // カナ姓
+		private String kanaMei;    // カナ名
+		private String birthDate;  // 生年月日(yyyy-mm-dd 形式)
+		private String age;	 //年齢
+		private String postalCode; // 郵便番号
+		private String address;    // 住所
+	}
+                                </pre>
+
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3-->
+                    <section id="section4" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">３，シーケンス図</h2>
+                            <div class="box_normal_IMG">
+                                <img src="./Chap7IMG/Sample04シーケンス図.png" alt="Sample04のシーケンス図">
+                            </div>
+                            <div class="box_normal">
+                                だいぶごちゃごちゃしてきました。<br>
+                                何度も申し上げますが、きれいに書くのが目的ではありません。<br>
+                                どういう流れで処理をするのかをシミュレーションするのが目的なのです。
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section ４-->
+                    <section id="section5" class="content-section">
+                        <div class="Box_Container">
+                            <h2 class="content-section h2">４，データベース操作</h2>
+                        </div>
+                        <div class="box_normal">
+                            <p><a href="Chapter7Jdbc.html">○Spring JDBCの使い方</a></p><br>
+                            <p>○Spring Data JPA</p>
+                        </div>
+                    </section>
+
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
